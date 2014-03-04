@@ -1,0 +1,53 @@
+#css_vertical_menu{
+/*1. the width of the vertical menu*/
+width:100%; 
+/*2. remove the default list bullets*/
+list-style:none;
+/*3. margin value to null – needed for Internet Explorer*/
+margin:0;
+/*4. a space (padding) of 1 px between the list border and its content*/
+padding:1px; 
+/*5. the background color of the menu*/
+background-color:#FFFFFF;
+/*6. a border of 1px around the menu*/
+border:0px solid #437E7E;
+}
+#css_vertical_menu a{
+/*1. convert the link from inline to block element so they cover all the available space*/
+display:block;
+/*2. a specific height – needed for Internet Explorer 6*/
+height:25px;
+/*3. a top space in between eack link*/
+margin-top:1px;
+/*4. and a left space (padding) between the border and the text link*/
+padding-left:10px;
+/*5. background color of the links*/
+background-color:#F0F7F7;
+/*6. a left border of 10px*/
+border-left:10px solid #C7E2E2;
+/*7. the font family*/
+font-family:arial;
+/*8. the font size*/
+font-size:12px;
+/*9. convert the font to capital letter*/
+text-transform:uppercase;
+/*10. remove the text underline added by default to the links*/
+text-decoration:none;
+/*11. the color of the text links*/
+color:#437E7E;
+/*12. vertical align of the text link (value equal to the height)*/
+line-height:25px;
+}
+#css_vertical_menu a:hover{
+/*1. change of background color*/
+background-color:#E5E5E5;
+/*2. change of the left border color*/
+border-left:10px solid #CCCCCC;
+/*3. change the color of the text link*/
+color:#666666;
+}
+#css_vertical_menu a.first{
+margin-top:0;
+}
+
+

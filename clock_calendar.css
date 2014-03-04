@@ -1,0 +1,23 @@
+div {
+background-color:#000;
+border:#999 1px inset;
+padding:6px;
+color:#0FF;
+font-family:"Arial Black", Gadget, sans-serif;
+font-size:16px;
+font-weight:bold;
+letter-spacing: 2px;
+display:inline;
+}
+#date {
+background-color:#000;
+border:#999 0px inset;
+padding:1px;
+color:#0FF;
+font-family:"Arial Black", Gadget, sans-serif;
+font-size:12px;
+font-weight:bold;
+letter-spacing: 1px;
+display:inline;
+}
+
