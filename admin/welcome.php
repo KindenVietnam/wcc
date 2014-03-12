@@ -30,7 +30,7 @@ ATTENDANCE RECORD MANAGEMENT
 <li><a href="welcome.php?31">Statistic Leaves Data</a></li>
 <li><a href="welcome.php?4">OverTime For Group</a></li>
 <li><a href="welcome.php?5">IN-OUT For Group</a></li>
-<li><a href="welcome.php?6">Print and Submit</a></li>
+<li><a href="welcome.php?6">Print attendance record</a></li>
 <li><a href="index.php">LOGOUT</a></li>
 </ul>
 </td>
@@ -38,6 +38,10 @@ ATTENDANCE RECORD MANAGEMENT
 				<!-- Content  -->
 							<?php
 							session_start();
+							$manhanvien = $_SESSION['id'];
+							if($manhanvien == 0){
+								header("location:index.php");
+							}
 							include("config.php");
 							include("ot.php");
 							$QS = $_SERVER["QUERY_STRING"];
