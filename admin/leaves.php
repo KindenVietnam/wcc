@@ -15,17 +15,16 @@ if(isset($_POST['search'])){
 	$op = $_POST['type'];
 	$staffid = $_POST['txttim'];
 		if ($op == "op_id"){
-		$sql_tim = "select * from staff where staff_id='$staffid'";
+			$sql_tim = "select * from staff where staff_id='$staffid'";
 		}
 		else{
-		$sql_tim = "select * from staff where name ilike '%$staffid%'";
+			$sql_tim = "select * from staff where name ilike '%$staffid%'";
 		}
 	}
 else{
 	$sql_tim = "select * from staff where staff_id='$staffid'";
 	}
 $result = pg_query($connection, $sql_tim);
-
 while($row = pg_fetch_array($result)){
 			$staffid = $row['staff_id'];
 			$name = $row['name'];
@@ -56,25 +55,27 @@ if(isset($_POST['save'])){
 	$ap = $_POST['ap'];
 	$st = $_POST['status'];
 	$linkback = $_POST['linkback'];
-	if($st == true)
-	{
-		$status = 'y';
-	}
-	else
-	{
-		$status = 'n';
-	}
+	if($st == true){
+			$status = 'y';
+		}
+	else{
+			$status = 'n';
+		}
 	if (($id=="")||($frdate=="")){
 		echo "please fill information !";
 		}
 	else{	
-		pg_query($connection, "INSERT INTO leaves(staff_id,fromdate,todate,reason,a_p,status) VALUES('$id','$frdate','$tdate','$reason','$ap','$status')");
+			pg_query($connection, "INSERT INTO leaves(staff_id,fromdate,todate,reason,a_p,status) VALUES('$id','$frdate','$tdate','$reason','$ap','$status')");
+			include_once('leaves_count.php');
+			$month = date("n", strtotime($frdate));
+			$year = date("Y", strtotime($frdate));
+		    count_leaves($id,$month,$year);
 		if($linkback == 1){
 		    header("location:leaves.php?id=$id");
-		}
+			}
 		else{
 		    header("location:welcome.php?3&&id=$id");
-		}
+			}
 	  }
 }
 echo '<form name="form1" method="post" action="welcome.php?3">';
@@ -196,8 +197,8 @@ echo '<table name="list_leaves" border="0">';
 							echo "<td>".$res['reason']."</td>";
 							echo "<td>".$status_."</td>";
 							$lydo = $res['reason'];
-echo "<td><a href=\"JavaScript:openURL_edit('edit_leaves.php?id1=$bien')\">Edit</a> |";
-echo "<a href=\"JavaScript:if(confirm('Confirm Delete?')==true){window.location='del_leaves.php?id=$bien&staffid=$staffid';}\">Delete</a></td>";
+							echo "<td><a href=\"JavaScript:openURL_edit('edit_leaves.php?id1=$bien')\">Edit</a> |";
+							echo "<a href=\"JavaScript:if(confirm('Confirm Delete?')==true){window.location='del_leaves.php?id=$bien&staffid=$staffid';}\">Delete</a></td>";  
 							echo "</tr>";
                 }
 		if($tongngaydanghiphep_trong6thang <= $lastleaves_year){

@@ -26,13 +26,13 @@ include("config.php");
 $status = $_POST['radiobutton'];
 $manhanvien = $_POST['txtstaffid'];
 if($status == 'allstaff'){
-    $sql_leaves_statistic = "select * from staff order by staff_id";
+    $sql_leaves_statistic = "select * from leaves_statistic order by staff_id";
 }
 else{
-  $sql_leaves_statistic = "select * from staff where staff_id = '$manhanvien'";
+  $sql_leaves_statistic = "select * from leaves_statistic where staff_id = '$manhanvien'";
 }
-$result_leaves_statistic = pg_query($connection, $sql_leaves_statistic);
-$result_leaves_count = pg_query($connection, $sql_leaves_statistic);
+	$result_leaves_statistic = pg_query($connection, $sql_leaves_statistic);
+	//$result_leaves_count = pg_query($connection, $sql_leaves_statistic);
 ?>
 <table width="100%" border="0" id= 'mtb'>
   <tr>
@@ -61,38 +61,34 @@ $result_leaves_count = pg_query($connection, $sql_leaves_statistic);
     <td width="30"><div align="center"><strong>Dec</strong></div></td>
   </tr>
   <?php
-  include_once('leaves_count.php');
-  while($row_leaves_count = pg_fetch_array($result_leaves_count)){
-        count_leaves($row_leaves_count['staff_id']);
-  }
   while($row_leaves_statistic = pg_fetch_array($result_leaves_statistic)){
     echo '<tr>';
     echo '<td width="70" ><div align="center">'.$row_leaves_statistic['staff_id'].'</div></td>';
     $bien = $row_leaves_statistic['staff_id'];
     echo '<td width="165" ><div align="center"><input type = "text" name = "staffname" value = "'.$row_leaves_statistic['name'].'"></div></td>';
-    echo '<td width="70" ><div align="center">'.$row_leaves_statistic['startdate'].'</div></td>';
-    $startdate = $row_leaves_statistic['startdate'];
-    $lastleaves_year = $row_leaves_statistic['lastyear_leaves'];
+    echo '<td width="70" ><div align="center">'.$row_leaves_statistic['startworking'].'</div></td>';
+    $startdate = $row_leaves_statistic['startworking'];
+    $lastleaves_year = $row_leaves_statistic['leaves_last'];
     $year = date("Y") - date("Y", strtotime($startdate));
 	  if ($year <= 5){
-                  if($year ==0){
+          if($year ==0){
 				  $leaves_curryear = 12 - date("n", strtotime($startdate));
 				}
 		  else{
 			  $leaves_curryear = 12;
 		      }
 	      }
-          elseif((6<=$year) && ($year<=9)){
+      elseif((6<=$year) && ($year<=9)){
 					    $leaves_curryear = 14;
 					  }
 	  else {
-		  $leaves_curryear = 16;
-		}
-          if(date("Y-n-j") <= date("Y-06-21")){
-                $phepnamtruoc = $lastleaves_year;
+				$leaves_curryear = 16;
+		   }
+      if(date("Y-n-j") <= date("Y-06-21")){
+              $phepnamtruoc = $lastleaves_year;
             }
-          else{
-                 $phepnamtruoc = 0;
+      else{
+            $phepnamtruoc = 0;
           }
     $totalleaves = $leaves_curryear + $phepnamtruoc;
     $tongngayphepdanghi = ($row_leaves_statistic['jan']+$row_leaves_statistic['feb']+$row_leaves_statistic['mar']+$row_leaves_statistic['apr']+
