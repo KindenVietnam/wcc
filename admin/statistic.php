@@ -51,7 +51,7 @@ for($i=1;$i<=$total_rows;$i++)
 	}
 }
 echo "</tr>";
-$sql_danhsachduan = "select * from machine";
+$sql_danhsachduan = "select machine_no,name from machine where status <> 0";
 $result = pg_query($connection, $sql_danhsachduan);
 /* tao bang */
 while($rows = pg_fetch_array($result))

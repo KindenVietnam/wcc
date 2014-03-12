@@ -1,6 +1,6 @@
 <?php
     include_once('ot.php');
-    include_once('../find_sat_in_month.php');
+    include_once('find_sat_in_month.php');
 function save_to_temp($id, $month){
     include('config.php');
     $count_early = 0; // dem di muon
@@ -66,7 +66,7 @@ function save_to_temp($id, $month){
    if(($ketqua_bang_cham_cong > 0)&&($ketqua_bang_tong_cham_cong > 0)&&($ketqua_bang_tong_overtime>0)&&($ketqua_count_early_lately)){
 	$update = 1;// update du lieu
     }
-  else{
+   else{
 	$update = 0; // insert du lieu
     }
     $mang_in = array();//mang chua du lieu in

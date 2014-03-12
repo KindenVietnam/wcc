@@ -1,5 +1,7 @@
 <?php
-	$curr_month = date('n');
+	parse_str($_SERVER['argv'][1], $_GET);
+	$curr_month = $_GET['thang']; 
+	//$curr_month = date('n');
 	include_once('config.php');
     include('save_to_temp_table.php');
 	$sql_staffid = "select staff_id from staff where staff_id >= '1000' and staff_id <= '1999'";
