@@ -5,3 +5,10 @@ o Change N.T.Dung S1856 role to admin
 Mar 05, 2014
 ====
 o Discuss with Mr. Hung about git and version control
++ Viec can giai quyet trong tuan Mar 3-7, 2014
+  + Giai quyet van de statistic attendance (sinh ra du lieu theo ky, va cap nhat moi tren du lieu co san)
+  + Giai quyet van de in ra PDF
+  + Kiem tra va crontab hoa cac tasks chay nen
+  + Gop du lieu cac may cham cong tai cung 1 van phong
+  + Cleanup cac may cham cong theo site hien tai khong con hoat dong
++ Found security bug: log in to admin interface without username and password
