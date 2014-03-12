@@ -36,6 +36,9 @@ ATTENDANCE RECORD ONLINE (CTRL + F5 TO REFRESH)
 <?php
 	session_start();
 	$username = $_SESSION['id'];
+	if($username == 0){
+			header("location:index.php");
+		}
 	include("config.php");
 	include("ot.php");
 	$sql = "SELECT * FROM staff WHERE staff_id = '$username'";
