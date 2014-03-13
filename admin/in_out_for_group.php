@@ -19,7 +19,7 @@ include('config.php');
   <label>Location
   <select name="select_location">
     <?php
-            $sql_load_location = "select * from machine";
+            $sql_load_location = "select * from machine where status <> '0'";
             $result_load_location = pg_query($connection, $sql_load_location);
             echo "<option>Select location ... </option>";
             while($row_load_location = pg_fetch_array($result_load_location))
@@ -87,7 +87,7 @@ include('config.php');
 <p>&nbsp;</p>
 <?php
 include('config.php');
-if($_POST['approved']=="Approve")
+if(isset($_POST['approved']))
 {
   $date = $_POST['date'];
   $time_in = $date.' '.$_POST['time_in'];
