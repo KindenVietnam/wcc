@@ -26,8 +26,8 @@ ATTENDANCE RECORD MANAGEMENT
 <li><a href="welcome.php?1">Staff Information</a></li>
 <li><a href="welcome.php?12">Statistic attendance</a></li>
 <li><a href="welcome.php?2">Holiday</a></li>
-<li><a href="welcome.php?3">Input Leaves Data</a></li>
-<li><a href="welcome.php?31">Statistic Leaves Data</a></li>
+<li><a href="welcome.php?3">Leave</a></li>
+<li><a href="welcome.php?31">Statistic Leave Data</a></li>
 <li><a href="welcome.php?4">OverTime For Group</a></li>
 <li><a href="welcome.php?5">IN-OUT For Group</a></li>
 <li><a href="welcome.php?6">Print attendance record</a></li>
