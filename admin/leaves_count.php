@@ -1,7 +1,7 @@
 <?php
-function count_leaves($manhanvien,$month,$year){
+function count_leaves($manhanvien){
 include('config.php');
-$sql_str = "SELECT * FROM leaves WHERE staff_id='$manhanvien' AND date_part('year', fromdate) = $year AND date_part('month', fromdate) = $month";
+$sql_str = "SELECT * FROM leaves WHERE staff_id='$manhanvien' AND date_part('year', fromdate) = date_part('year', current_date) AND date_part('month', fromdate) = date_part('month', current_date)";
 $result=pg_query($connection, $sql_str);
 $subtotalleaves = 0;
 while($res=pg_fetch_array($result)){
@@ -14,19 +14,19 @@ while($res=pg_fetch_array($result)){
 							     $number_leaves = 1/2;
 							}
                          else{
-                               $number_leaves = 1;
-                            }
+                                 $number_leaves = 1;
+                             }
 				    }
 				    else{
-					    if($a_p>0){
-							$number_leaves = $todate - $fromdate - 0.5;
-							}
-					    else{
-							$number_leaves = $todate - $fromdate;
-						}
-                    }
+										if($a_p>0){
+												$number_leaves = (($todate - $fromdate)+1) - 0.5;
+												}
+										else{
+												$number_leaves = ($todate - $fromdate)+1;
+											}
+                        }
 				$subtotalleaves = $subtotalleaves + $number_leaves;
-}
+             }
 $curr_month = date('M');
 switch($curr_month){
     case 'Jan':{
