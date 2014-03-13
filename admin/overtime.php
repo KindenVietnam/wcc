@@ -17,13 +17,13 @@ include('config.php');
   <label>Location
   <select name="select_location">
     <?php
-            $sql_load_location = "select * from machine";
+            $sql_load_location = "select * from machine where status <> '0'";
             $result_load_location = pg_query($connection, $sql_load_location);
             echo "<option>Select location ... </option>";
             while($row_load_location = pg_fetch_array($result_load_location))
-            {
-              echo "<option>".$row_load_location['name']."</option>";
-            }
+				{
+					echo "<option>".$row_load_location['name']."</option>";
+				}
     ?>
   </select>
   </label>
@@ -82,8 +82,11 @@ include('config.php');
 include_once('ot.php');
 $date = $_POST['date'];
 $ah_status = $_POST['status_ah'];
-if($_POST['approved']=="Approve")
-{
+if($ah_status != 1){
+	$trangthai = 3;
+}
+if(isset($_POST['approved']))
+	{
       echo "<table id = 'tb1' width = '100%'>";
       echo "<tr>";
       echo "<td colspan='1' rowspan=3>Staff ID</td>";
@@ -113,23 +116,23 @@ if($_POST['approved']=="Approve")
         //them function tim thoi gian in out
         //kiem tra va tinh overtime
         //luu vao bang overtime
-         tinh_inout($check_id,$date);
+         tinh_inout($ah_status,$check_id,$date,$trangthai);
       }
   }
    echo "<script>alert('Successfull !')</script>";
    echo "</table>";
 }
-function tinh_inout($staff_id, $workday){
-                        include('config.php');
-                        $username = $staff_id;
-                        $sql_holiday = "select count(holiday) as ngayle from public_holiday where holiday = '$workday'";
-                        $sql_staff_name = "select name from staff where staff_id = '$username'";
-                        $ketqua_holiday = pg_query($connection, $sql_holiday);
-                        $row_holiday = pg_fetch_array($ketqua_holiday);
-                        $ketqua_staff_name = pg_query($connection, $sql_staff_name);
-                        $row_staff_name = pg_fetch_array($ketqua_staff_name);
-                        $staff_name = $row_staff_name['name'];
-                        $holiday_status = $row_holiday['ngayle'];// lay ngay nghi le trong co so du lieu
+function tinh_inout($ah_status,$staff_id, $workday,$trangthai){
+            include('config.php');
+            $username = $staff_id;
+            $sql_holiday = "select count(holiday) as ngayle from public_holiday where holiday = '$workday'";
+            $sql_staff_name = "select name from staff where staff_id = '$username'";
+            $ketqua_holiday = pg_query($connection, $sql_holiday);
+            $row_holiday = pg_fetch_array($ketqua_holiday);
+            $ketqua_staff_name = pg_query($connection, $sql_staff_name);
+            $row_staff_name = pg_fetch_array($ketqua_staff_name);
+            $staff_name = $row_staff_name['name'];
+            $holiday_status = $row_holiday['ngayle'];// lay ngay nghi le trong co so du lieu
 			$curr_month = date("n", strtotime($workday));
 			$curr_year = date("Y", strtotime($workday));
 			$last_year = date("Y", strtotime($workday))-1;
@@ -266,7 +269,7 @@ function tinh_inout($staff_id, $workday){
 			}
                         if(strtotime($workday) == strtotime($c_date)){
                             $ngaytrongtuan = date('D', strtotime($c_date));
-                            overtime_from_location($staff_id,$staff_name,$ngaytrongtuan,$c_date,$mang_in[$f],$mang_out[$f],$holiday_status,3);
+                            overtime_from_location($ah_status,$staff_id,$staff_name,$ngaytrongtuan,$c_date,$mang_in[$f],$mang_out[$f],$holiday_status,$trangthai);
                         }  
                         $f=$f+1;// tang so chi muc mang
 		}
@@ -274,7 +277,7 @@ function tinh_inout($staff_id, $workday){
 
 // ham xuat du lieu overtime
 
-function overtime_from_location($staffid,$ten_staff,$weekday,$date,$thoigianvao,$thoigianra,$holiday,$trangthai) {
+function overtime_from_location($ah_status,$staffid,$ten_staff,$weekday,$date,$thoigianvao,$thoigianra,$holiday,$trangthai) {
       $ot_gio_ra = 0;
       $ot_gio_vao = 0;
       $ot_phut_ra = 0;
@@ -375,10 +378,10 @@ function overtime_from_location($staffid,$ten_staff,$weekday,$date,$thoigianvao,
       $hour_in = $gio_vao;
       $hour_out = $gio_ra;
       $minutes_vao = $phut_vao;
-      overtime_output($trangthai,$tong_ot_ra,$tong_st_ra,$tong_ot_vao,$tong_st_vao,$tong_ot,$tong_st,$hour_in,$hour_out,$minutes_vao,$weekday,$date,$staffid,$holiday,$thoigianvao,$thoigianra,$ten_staff);
+      overtime_output($ah_status,$trangthai,$tong_ot_ra,$tong_st_ra,$tong_ot_vao,$tong_st_vao,$tong_ot,$tong_st,$hour_in,$hour_out,$minutes_vao,$weekday,$date,$staffid,$holiday,$thoigianvao,$thoigianra,$ten_staff);
      // alert(trangthai + tong_ot_ra + tong_st_ra + tong_ot_vao + tong_st_vao + tong_ot + tong_st + hour_in + hour_out + minutes_vao + date + staffid + holiday);
 }
-function overtime_output($status,$total_ot_ra,$total_st_ra,$total_ot_vao,$total_st_vao,$total_ot,$total_st,$gio_vao,$gio_ra,$phut_vao,$weekday,$ngay,$manv,$ngaynghi,$timein,$timeout,$tennhanvien){
+function overtime_output($ah_status,$status,$total_ot_ra,$total_st_ra,$total_ot_vao,$total_st_vao,$total_ot,$total_st,$gio_vao,$gio_ra,$phut_vao,$weekday,$ngay,$manv,$ngaynghi,$timein,$timeout,$tennhanvien){
      //var weekday = ngay.getDay();
      //$weekday = $ngay;
      $total_ot_h = 0;
