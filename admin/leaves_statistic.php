@@ -22,6 +22,11 @@
   <input type="submit" name="Submit" value="Search">
 </form>
 <?php
+							session_start();
+							$manhanvien = $_SESSION['id'];
+							if($manhanvien == 0){
+								header("location:index.php");
+							}
 include("config.php");
 $status = $_POST['radiobutton'];
 $manhanvien = $_POST['txtstaffid'];

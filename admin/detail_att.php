@@ -10,7 +10,7 @@ echo 'Attendance record statistic in ' .$day. '<br>';
 echo 'Location : ' . $hang->name . '<br>';
 echo '<table width="100%">';
 echo "<tr bgcolor=#A9BCF5>";
-echo '<td>Over Time</td>';
+//echo '<td>Over Time</td>';
 echo '<td>Staff ID</td>';
 echo "<td>Staff's Name</td>";
 echo '<td>Workday</td>';
@@ -45,7 +45,7 @@ while($hang = pg_fetch_array($ketqua2)){
 					$intime = '0:00';
 				}
 		echo '<tr>';
-		echo '<td><input type="checkbox" name="ch_ovettime" value="1"></td>';
+		//echo '<td><input type="checkbox" name="ch_ovettime" value="1"></td>';
 		echo '<td>'.$hang['staff_id'].'</td>';
 		echo '<td>'.$hang['name'].'</td>';
 		echo '<td>'.$hang['workday'].'</td>';

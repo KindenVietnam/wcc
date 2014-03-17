@@ -1,5 +1,10 @@
 <link rel="stylesheet" type="text/css" href="table.css"/>
 <?php
+							session_start();
+							$manhanvien = $_SESSION['id'];
+							if($manhanvien == 0){
+								header("location:index.php");
+							}
 include('config.php');
 include("ot.php");
 $staffid = $_GET['id'];

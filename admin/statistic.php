@@ -5,6 +5,11 @@
 </script> 
 <link rel = "stylesheet" type="text/css" href = "table.css"/>
 <?php
+							session_start();
+							$manhanvien = $_SESSION['id'];
+							if($manhanvien == 0){
+								header("location:index.php");
+							}
 include_once("config.php");
 //lay so ngay cua mot thang
 $month = $_GET['month'];

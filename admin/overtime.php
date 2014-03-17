@@ -8,10 +8,14 @@
 <title>Over Time for group</title>
 </head>
 <body>
-<?php
-//ket noi database
-include('config.php');
-?>
+						<?php
+							session_start();
+							$manhanvien = $_SESSION['id'];
+							if($manhanvien == 0){
+								header("location:index.php");
+							}
+							include('config.php');
+						?>
 <h3>Over Time For Group</h3>
 <form id="form1" name="form_overtime" method="post" action="welcome.php?4">
   <label>Location
@@ -31,7 +35,7 @@ include('config.php');
   <input type="text" name="date" onFocus="JavaScript:showCalendarControl(this);"/>
   </label>
   <input type="submit" name="Submit" value="Search" />
-  <p>&nbsp</p>
+  <p> &nbsp </p>
   <p><input type="checkbox" name="status_ah" value="1">AH</p>
   <table width="100%" border="0" id = "tb1">
     <tr>
@@ -55,7 +59,7 @@ include('config.php');
     $result_load_staff = pg_query($connection,$sql_load_staff);
     $id = 0;
     while($row_load_staff = pg_fetch_array($result_load_staff))
-    {
+		{
         $id=$id+1;
         echo '<tr>';
         echo '<td>'.$id.'</td>';
@@ -65,7 +69,7 @@ include('config.php');
         echo '<td><input type="text" name="date" value="'.$date.'"></td>';
         echo '<td><label><input type="checkbox" name="checklist[]" value="'.$row_load_staff['staffid'].'" />Over time</label></td>';
         echo '</tr>';
-    }
+		}
   ?>
   </table>
   <p>
@@ -111,14 +115,14 @@ if(isset($_POST['approved']))
       echo "<td style='width:50px'>OT</td>";
       echo "<td style='width:50px'>ST</td>";
       echo "</tr>";
-  foreach($_POST['checklist'] as $check_id){
-      if(!empty($_POST['checklist'])){
-        //them function tim thoi gian in out
-        //kiem tra va tinh overtime
-        //luu vao bang overtime
-         tinh_inout($ah_status,$check_id,$date,$trangthai);
-      }
-  }
+      foreach($_POST['checklist'] as $check_id){
+	  if(!empty($_POST['checklist'])){
+	    //them function tim thoi gian in out
+	    //kiem tra va tinh overtime
+	    //luu vao bang overtime
+	      tinh_inout($ah_status,$check_id,$date,$trangthai);
+	  }
+	}
    echo "<script>alert('Successfull !')</script>";
    echo "</table>";
 }
@@ -608,20 +612,20 @@ function overtime_to_db($staffid,$work_day,$week_day,$attmark,$w_ot,$w_st,$h_ot,
     }
     else{
         echo "<tr>";
-	echo "<td style='width: 70px;'>".$staffid."</td>";
+		echo "<td style='width: 70px;'>".$staffid."</td>";
         echo "<td style='width: 170px;'>".$staffname."</td>";
-	echo "<td style='width: 70px'>".$work_day."</td>";
+		echo "<td style='width: 70px'>".$work_day."</td>";
         echo "<td style='width: 70px'>".$week_day."</td>";
-	//echo "<td>".$attmark."</td>";
-	echo "<td>".$w_ot."</td>";
-	echo "<td>".$w_st."</td>";
-	echo "<td>".$h_ot."</td>";
-	echo "<td>".$h_st."</td>";
-	echo "<td>".$p_ot."</td>";
-	echo "<td>".$p_st."</td>";
-	echo "<td>".$thoigianvao."</td>";
-	echo "<td>".$thoigianra."</td>";
-	echo "</tr>";
+		//echo "<td>".$attmark."</td>";
+		echo "<td>".$w_ot."</td>";
+		echo "<td>".$w_st."</td>";
+		echo "<td>".$h_ot."</td>";
+		echo "<td>".$h_st."</td>";
+		echo "<td>".$p_ot."</td>";
+		echo "<td>".$p_st."</td>";
+		echo "<td>".$thoigianvao."</td>";
+		echo "<td>".$thoigianra."</td>";
+		echo "</tr>";
     }
 }
 ?>

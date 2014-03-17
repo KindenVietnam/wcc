@@ -76,9 +76,6 @@ ATTENDANCE RECORD MANAGEMENT
 							elseif($QS == 3){
 							      include('leaves.php');
 							}
-							elseif($QS == 7){
-								include('print_all.php');
-							}
 							else
 								{
 									//include('leaves.php');

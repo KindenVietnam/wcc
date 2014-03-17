@@ -11,6 +11,13 @@
 </script> 
 </head>
 <body>
+<?php
+							session_start();
+							$manhanvien = $_SESSION['id'];
+							if($manhanvien == 0){
+								header("location:index.php");
+							}
+?>
 <form name="form1" method="post" action="welcome.php?6">
 <table>
     <tr>

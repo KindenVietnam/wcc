@@ -6,6 +6,12 @@
 <link href="calendar.css" rel="stylesheet" type="text/css">
 <script src="calendar.js" language="javascript"></script>
 <?php
+							session_start();
+							$manhanvien = $_SESSION['id'];
+							if($manhanvien == 0){
+								header("location:index.php");
+							}
+
 include("config.php");
 include_once('leaves_count.php');
 $linkback = $_GET['linkback'];

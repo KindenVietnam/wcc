@@ -7,6 +7,11 @@
 <script src="calendar.js" language="javascript"></script>
 <h2><left>Holidays</left></h2>
 <?php
+							session_start();
+							$manhanvien = $_SESSION['id'];
+							if($manhanvien == 0){
+								header("location:index.php");
+							}
 include_once("config.php");
 $del = $_GET['del'];
                 echo '<form name = "form1" method="post" action = "welcome.php?2">';
