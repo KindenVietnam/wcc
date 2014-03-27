@@ -22,16 +22,16 @@
   <input type="submit" name="Submit" value="Search">
 </form>
 <?php
-							session_start();
-							$manhanvien = $_SESSION['id'];
-							if($manhanvien == 0){
-								header("location:index.php");
-							}
+    session_start();
+    $manhanvien = $_SESSION['id'];
+    if($manhanvien == 0){
+	  header("location:index.php");
+	}
 include("config.php");
 $status = $_POST['radiobutton'];
 $manhanvien = $_POST['txtstaffid'];
 if($status == 'allstaff'){
-    $sql_leaves_statistic = "select * from staff order by staff_id";
+    $sql_leaves_statistic = "select * from staff where staff_id <= '1999' and '1000' <= staff_id order by staff_id";
 }
 else{
   $sql_leaves_statistic = "select * from staff where staff_id = '$manhanvien'";
