@@ -22,7 +22,7 @@
 <table>
     <tr>
         <td>
-            <h2>Print attendance record</h2>
+            <h2>Print attendance record for all staffs</h2>
             <!--<lable>Choose a month
               <select name="month">
               <option>1</option>
