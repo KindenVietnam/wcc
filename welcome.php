@@ -4,6 +4,16 @@
 <link rel="stylesheet" type="text/css" href="css_vertical_menu.css"/>
 <link rel="stylesheet" type="text/css" href="clock_calendar.css"/>
 <link rel="stylesheet" type="text/css" href="table.css"/>
+
+<script type = "text/javascript">
+  function openURL_pdf(sURL){ 
+             window.open(sURL,"Window2","menubar=no,width=100,height=100,toolbar=no"); 
+          }
+  function openURL_working(sURL){ 
+             //window.open(sURL,"Window1","width=1200,height=700"); 
+			 window.open(sURL); 
+          } 
+</script> 
 </head>
 <body>
 <table border = "0" width="100%">
@@ -160,6 +170,7 @@ ATTENDANCE RECORD ONLINE (CTRL + F5 TO REFRESH)
 session_start();
 include_once('att_record.php');
 include_once('detail_leaves.php');
+
 $QS = $_SERVER["QUERY_STRING"];
 $month = date('n');
 if ($QS == 1) // password
@@ -174,7 +185,9 @@ elseif($QS == 2){// print attendance record
 elseif($QS == 3){//download attendance record sheet
 	//include_once('phpToPDF.php');
 	$staffid = $_SESSION['id'];
-	att_view($staffid,$month);
+	$_GET['month'] = $month;
+	$_GET['staffid'] = $staffid;
+	include_once('admin/in_pdf.php');
 }
 elseif($QS==4){
 	//thong tin ngay phep
@@ -184,7 +197,7 @@ elseif($QS==4){
 else // current Month
         {
 	$staffid = $_SESSION['id'];
-	att_view_main($staffid);
+	att_view($staffid,$month);
 	}
 ?>
 </td>
