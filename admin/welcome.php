@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Attendance Record Management</title>
-<link rel="stylesheet" type="text/css" href="css_vertical_menu.css"/>
+<link rel="stylesheet" type="text/css" href="menu_admin.css"/>
 <link rel="stylesheet" type="text/css" href="clock_calendar.css"/>
 <link rel="stylesheet" type="text/css" href="table.css"/>
 </head>
@@ -23,15 +23,36 @@ ATTENDANCE RECORD MANAGEMENT
 <td width = "15%" valign ="top">
 <ul id="css_vertical_menu">
 <li><a href="welcome.php">Main Menu</a></li>
-<li><a href="welcome.php?1">Staff Information</a></li>
+<li><a href="welcome.php?1">Staff's Infor</a></li>
 <li><a href="welcome.php?12">Statistic attendance</a></li>
 <li><a href="welcome.php?2">Holiday</a></li>
-<li><a href="welcome.php?3">Leave</a></li>
-<li><a href="welcome.php?31">Statistic Leave Data</a></li>
-<li><a href="welcome.php?4">OverTime For Group</a></li>
-<li><a href="welcome.php?5">IN-OUT For Group</a></li>
-<li><a href="welcome.php?6">Print attendance record</a></li>
-<li><a href="index.php">LOGOUT</a></li>
+<li><a href="#">Leave</a>
+      <ul>
+	<li><a href="welcome.php?3">Enter Leave</a></li>
+	<li><a href="welcome.php?31">Statistic Leave</a></li>
+      </ul>
+</li>
+<li><a href="#">Overtime</a>
+	<ul>
+	<li><a href="welcome.php?41">Overtime for one</a></li>
+	<li><a href="welcome.php?4">OverTime For Group</a></li>
+	</ul>
+</li>
+<li><a href="#">In-Out</a>
+	<ul>
+	<li><a href="welcome.php?51">IN-OUT For One</a></li>
+	<li><a href="welcome.php?5">IN-OUT For Group</a></li>
+	</ul>
+</li>
+<li>
+	<a href="#">Print report</a>
+	<ul>
+		<li><a href="welcome.php?61">One staff </a></li>
+		<li><a href="welcome.php?6">All staffs</a></li>
+	</ul>
+</li>
+
+<li><a href="index.php">Logout</a></li>
 </ul>
 </td>
 <td width = "85%" valign = "top">
@@ -64,14 +85,23 @@ ATTENDANCE RECORD MANAGEMENT
 							elseif($QS == 4){
 								 include('overtime.php');
 							}
+							elseif($QS == 41){
+								 include('overtime_for_one.php');
+							}
 							elseif($QS == 5){
 								  include('in_out_for_group.php');
+							}
+							elseif($QS == 51){
+								  include('in_out_for_one.php');
 							}
 							elseif($QS == 31){
 								include('leaves_statistic.php');
 							}
 							elseif($QS == 6){
 								include('print_attendance.php');
+							}
+							elseif($QS == 61){
+								include('in_pdf_one_staff.php');
 							}
 							elseif($QS == 3){
 							      include('leaves.php');
