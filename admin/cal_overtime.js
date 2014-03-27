@@ -57,29 +57,32 @@ function overtime_phut_ra(time_out,gio_out) { // function to compute over time i
           return 0;
      }
 }
-function overtime_phut_vao(time_in,gio_in) { //function to compute over time in minutes for checking in
-   //  if (gio_in < 8) {
+
+//Define function:
+// Name: overtime_phut_vao
+// params: time_in, gio_in
+//
+// Tinh toan hien thi gio lam them buoi sang hoac (in)
+
+function overtime_phut_vao(time_in,gio_in) { 
+   if ((gio_in < 8) && (gio_in > 5)) {
+			   
                if ((time_in <= 45)&&(time_in > 30)) {
                     var phut_in = 0.25;
-                    return phut_in;
-               }
+                    }
                else if ((time_in <= 30)&&(time_in > 15 )) {
                     var phut_in = 0.5;
-                    return phut_in;
-               }
+                    }
                else if ((time_in <= 15 )&&(time_in > 0 )) {
                     var phut_in = 0.75;
-                    return phut_in;
-               }
-               else{
-                    var phut_in = 0;
-                    return phut_in;
-               }
-    // }
-    // else{
-    //      return 0;
-    // }
+					}
+               else {
+				    var phut_in = 0;
+			   }
+	return phut_in;
+	}
 }
+
 //function overtime(trangthai,thoigianvao,thoigianra) {
 function overtime(trangthai) {
       var ot_gio_ra = 0,ot_gio_vao = 0,ot_phut_ra = 0,ot_phut_vao = 0;
