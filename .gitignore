@@ -2,3 +2,4 @@ config.php
 /admin/att_pdf/*.pdf
 website-chamcong.komodoproject
 
+admin/.pdf
