@@ -58,30 +58,32 @@ function overtime_phut_ra(time_out,gio_out) { // function to compute over time i
      }
 }
 
-//Define function:
+// BEGIN function:
 // Name: overtime_phut_vao
 // params: time_in, gio_in
 //
 // Tinh toan hien thi gio lam them buoi sang hoac (in)
 
 function overtime_phut_vao(time_in,gio_in) { 
+var phut_in = 0;
    if ((gio_in < 8) && (gio_in > 5)) {
 			   
                if ((time_in <= 45)&&(time_in > 30)) {
-                    var phut_in = 0.25;
+                    phut_in = 0.25;
                     }
                else if ((time_in <= 30)&&(time_in > 15 )) {
-                    var phut_in = 0.5;
+                    phut_in = 0.5;
                     }
-               else if ((time_in <= 15 )&&(time_in > 0 )) {
-                    var phut_in = 0.75;
-					}
                else {
-				    var phut_in = 0;
+                    phut_in = 0.75;
 			   }
-	return phut_in;
+               
 	}
+	return phut_in;
 }
+
+// END function
+//
 
 //function overtime(trangthai,thoigianvao,thoigianra) {
 function overtime(trangthai) {
