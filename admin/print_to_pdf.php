@@ -140,7 +140,7 @@
 
 					$sql_bang_cham_cong = "select * from bang_cham_cong where staff_id = '$manhanvien' and  '$khoang_1' <= date and date <= '$khoang_2' order by date asc";
 					//$sql_bang_cham_cong   = "select * from bang_cham_cong where staff_id = '$manhanvien' and date >= '$khoang_1' and date <= '$khoang_2' order by date asc";
-
+					$g=0;
 					$result_bang_cham_cong = pg_query($connection, $sql_bang_cham_cong);
 					while($rows_bang_cham_cong = pg_fetch_array($result_bang_cham_cong))
 					{
@@ -172,24 +172,25 @@
 					$rows_bang_tong_overtime = pg_fetch_array($result_bang_tong_overtime);
 					// paint for late-in and Early
 					$pdf->SetFont('times', 'B', 8);
-					$pdf->MultiCell(40, 3, 'Total(hrs)'.$txt, 1, 'C', 0, 1, '15', '169', true);
-					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_w_ot'], 1, 'C', 0, 1, '55', '169', true);
-					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_w_st'], 1, 'C', 0, 1, '65', '169', true);
-					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_h_ot'], 1, 'C', 0, 1, '75', '169', true);
-					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_h_st'], 1, 'C', 0, 1, '85', '169', true);
-					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_sh_ot'], 1, 'C', 0, 1, '95', '169', true);
-					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_sh_st'], 1, 'C', 0, 1, '105', '169', true);
-					$pdf->MultiCell(15, 3, ''.$txt, 1, 'C', 0, 1, '115', '169', true);
+					$pdf->MultiCell(40, 3, 'Total(hrs)'.$txt, 1, 'C', 0, 1, '15', $g+4, true);
+					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_w_ot'], 1, 'C', 0, 1, '55', $g+4, true);
+					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_w_st'], 1, 'C', 0, 1, '65', $g+4, true);
+					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_h_ot'], 1, 'C', 0, 1, '75', $g+4, true);
+					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_h_st'], 1, 'C', 0, 1, '85', $g+4, true);
+					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_sh_ot'], 1, 'C', 0, 1, '95', $g+4, true);
+					$pdf->MultiCell(10, 3, $rows_bang_tong_overtime['t_sh_st'], 1, 'C', 0, 1, '105', $g+4, true);
+					$pdf->MultiCell(15, 3, ''.$txt, 1, 'C', 0, 1, '115', $g+4, true);
 
 					// late-in times this period 
 					$sql_bang_count_early_lately = "select * from count_early_lately where staff_id= '$manhanvien' and date_part ('year',date) = '$nam_hien_tai' and date_part('month',date) = '$month'"; 
 					$result_bang_count_early_lately = pg_query($connection,$sql_bang_count_early_lately);
 					$rows_bang_count_early_lately = pg_fetch_array($result_bang_count_early_lately);
 					$pdf->SetFont('times', 'B', 8);
-					$pdf->MultiCell(60, 3, 'Late-In Times this period'.$txt, 1, 'C', 0, 1, '15', '178', true);
-					$pdf->MultiCell(10, 3, $rows_bang_count_early_lately['early'], 1, 'C', 0, 1, '75', '178', true);
-					$pdf->MultiCell(60, 3, 'Early-Out Times this period'.$txt, 1, 'C', 0, 1, '15', '182', true);
-					$pdf->MultiCell(10, 3, $rows_bang_count_early_lately['lately'], 1, 'C', 0, 1, '75', '182', true);
+					$pdf->MultiCell(60, 3, 'Late-In and Early-Out Times this period'.$txt, 1, 'L', 0, 1, '15', '178', true);
+					$early_lately = $rows_bang_count_early_lately['early'] + $rows_bang_count_early_lately['lately'];
+					$pdf->MultiCell(10, 3, $early_lately, 1, 'C', 0, 1, '75', '178', true);
+					$pdf->MultiCell(60, 3, 'Forgot Times this period'.$txt, 1, 'L', 0, 1, '15', '182', true);
+					$pdf->MultiCell(10, 3, $forgot, 1, 'C', 0, 1, '75', '182', true);
 
 					// Status of working
 					$sql_bang_tong_cham_cong = "select * from bang_tong_cham_cong where staff_id = '$manhanvien' and date_part('year',date) = '$nam_hien_tai' and date_part('month',date) = '$month'";
@@ -197,7 +198,7 @@
 					$result_bang_tong_cham_cong = pg_query($connection, $sql_bang_tong_cham_cong);
 					$rows_bang_tong_cham_cong = pg_fetch_array($result_bang_tong_cham_cong);
 					$pdf->SetFont('times', 'B', 8);
-					$pdf->MultiCell(40, 0, '<1> Status of working'.$txt, 0, 'L', 0, 1, '15', '190', true);
+					$pdf->MultiCell(40, 0, 'Status of working'.$txt, 0, 'L', 0, 1, '15', '190', true);
 					$pdf->SetFont('times', '', 8);
 					$pdf->MultiCell(60, 0, ''.$txt, 1, 'C', 0, 1, '25', '194', true);
 					$pdf->MultiCell(10, 0, 'Days'.$txt, 1, 'L', 0, 1, '85', '194', true);
@@ -214,9 +215,9 @@
 					$pdf->MultiCell(10, 0, $rows_bang_tong_cham_cong['t_sh'], 1, 'C', 0, 1, '85', '214', true);
 					$pdf->MultiCell(60, 0, 'Total Working days'.$txt, 1, 'L', 0, 1, '25', '218', true);
 					$pdf->MultiCell(10, 0, $rows_bang_tong_cham_cong['t_workingday'], 1, 'C', 0, 1, '85', '218', true);
-					$pdf->MultiCell(60, 0, 'Staff in charge of Administration Dep'.$txt, 0, 'L', 0, 1, '25', '238', true);
+					//$pdf->MultiCell(60, 0, 'Staff in charge of Administration Dep'.$txt, 0, 'L', 0, 1, '25', '238', true);
 					//job-performance
-					$pdf->SetFont('times', 'B', 8);
+					/*$pdf->SetFont('times', 'B', 8);
 					$pdf->MultiCell(100, 0, '<2> Job-Performance Condition (Evaluated by your Manager)'.$txt, 0, 'L', 0, 1, '105', '190', true);
 					$pdf->SetFont('times', '', 8);
 					$pdf->MultiCell(100, 0, 'Only in case of change for his/her working conditions,Enter here'.$txt, 0, 'L', 0, 1, '105', '194', true);
@@ -225,10 +226,10 @@
 					$pdf->MultiCell(45, 0, 'Efficiency & Quality'.$txt, 1, 'C', 0, 1, '105', '202', true);
 					$pdf->MultiCell(55, 0, ''.$txt, 1, 'C', 0, 1, '150', '202', true);
 					$pdf->MultiCell(40, 0, 'Check by:'.$txt, 0, 'L', 0, 1, '105', '210', true);
-					$pdf->MultiCell(60, 0, 'Manager of your Department(Section Manager)'.$txt, 0, 'L', 0, 1, '110', '214', true);
+					$pdf->MultiCell(60, 0, 'Manager of your Department(Section Manager)'.$txt, 0, 'L', 0, 1, '110', '214', true); */
 					$pdf->MultiCell(40, 0, 'Approved by:'.$txt, 0, 'L', 0, 1, '105', '226', true);
-					$pdf->MultiCell(40, 0, 'Project Manager:'.$txt, 0, 'L', 0, 1, '110', '238', true);
-					$pdf->MultiCell(40, 0, 'ADM. General Manager'.$txt, 0, 'C', 0, 1, '130', '238', true);
+					/*$pdf->MultiCell(40, 0, 'Project Manager:'.$txt, 0, 'L', 0, 1, '110', '238', true);
+					$pdf->MultiCell(40, 0, 'ADM. General Manager'.$txt, 0, 'C', 0, 1, '130', '238', true);*/
 
 					// paint Header
 
