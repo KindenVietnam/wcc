@@ -1,10 +1,17 @@
 <link rel="stylesheet" type="text/css" href="table.css"/>
+<style>
+    table #mtb{
+	text-align: center;
+	font-size: 12px;
+    }
+</style>
 <?php
 $month = $_GET['thang'];
 $manv = $_GET['manv'];
 $status = $_GET['status'];
 include_once('ot.php');
 include_once('find_sat_in_month.php');
+// check dang nhap
 if($status == 1){
     att_view($manv,$month);
 }
@@ -12,6 +19,12 @@ if($status == 1){
 function att_view($id,$thang){
     include('config.php');
     //include('ot.php');
+    // check authen if it is already logined
+    session_start();
+	$username = $_SESSION['id'];
+	if($username == 0){
+			header("location:index.php");
+		}
     $count_early = 0; // dem di muon
     $count_lately = 0; // dem ve som
     $count_o = 0; // dem ngay di lam bt
@@ -27,6 +40,7 @@ function att_view($id,$thang){
     $total_sh_ot = 0;
     $total_sh_st = 0;
     $month = $thang;
+    /*
     echo "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
     echo "<table width='100%' border=0>";
     echo "<td>";
@@ -48,28 +62,29 @@ function att_view($id,$thang){
     $row_ten_nhan_vien = pg_fetch_array($result_ten_nhanvien);
     echo "<strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$row_ten_nhan_vien['name']."</strong>";
     echo "<strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspApplicant's Signature</strong>";
-    echo "<table width='100%' border=0 id='mtb'>";//noi dung report
+    */
+    echo "<table border=0 id='mtb'>";//noi dung report
     echo "<tr>";
-    echo "<td colspan='2' rowspan=3>Date</td>";
-    echo "<td colspan='1' rowspan=3 style='width:70px;'>Attendance Mark</td>";
-    echo "<td colspan='6'>Over Time</td>";
-    echo "<td rowspan='3'>Detail Work</td>";
-    echo "<td colspan=2'>Working Time</td>";
+    echo "<td colspan='2' rowspan=3 style='width:100px;'>Date</td>";
+    echo "<td colspan='1' rowspan=3 style='width:50px;'>Att Mark</td>";
+    echo "<td colspan='6' style='width:180px;'>Over Time</td>";
+    echo "<td rowspan='3' style='width:140px;'>Detail Work</td>";
+    echo "<td colspan=2' style='width=120px;'>Working Time</td>";
     echo "</tr>";
     echo "<tr>";
-    echo "<td colspan=2>Weekday</td>";
-    echo "<td colspan=2>Holiday</td>";
-    echo "<td colspan=2>Public Holiday</td>";
-    echo "<td rowspan=2 style='width:80px'>IN</td>";
-    echo "<td rowspan=2 style='width:80px'>OUT</td>";
+    echo "<td colspan=2 style='width:60px;'>Weekday</td>";
+    echo "<td colspan=2 style='width:60px;'>Holiday</td>";
+    echo "<td colspan=2 style='width:60px;'>Public Holiday</td>";
+    echo "<td rowspan=2 style='width:60px'>IN</td>";
+    echo "<td rowspan=2 style='width:60px'>OUT</td>";
     echo "</tr>";
     echo "<tr>";
-    echo "<td style='width:50px'>OT</td>";
-    echo "<td style='width:50px'>ST</td>";
-    echo "<td style='width:50px'>OT</td>";
-    echo "<td style='width:50px'>ST</td>";
-    echo "<td style='width:50px'>OT</td>";
-    echo "<td style='width:50px'>ST</td>";
+    echo "<td style='width:30px'>OT</td>";
+    echo "<td style='width:30px'>ST</td>";
+    echo "<td style='width:30px'>OT</td>";
+    echo "<td style='width:30px'>ST</td>";
+    echo "<td style='width:30px'>OT</td>";
+    echo "<td style='width:30px'>ST</td>";
     echo "</tr>";
     $curr_month = $month;
     $last_year = date("Y")-1;
@@ -82,7 +97,7 @@ function att_view($id,$thang){
         $last_month = $month - 1;
         $days_in_last_month = cal_days_in_month(CAL_GREGORIAN, $last_month, $curr_year);
     }
-    switch ($days_in_last_month) {
+   /* switch ($days_in_last_month) {
         case 31:
             $rows = 51;
             break;
@@ -95,7 +110,8 @@ function att_view($id,$thang){
         case 28:
             $rows = 48;
             break;
-            }
+        }*/
+   $rows = $days_in_last_month + date('j');
     	      $mang_in = array();//mang chua du lieu in
 	      $mang_out = array();// mang chua du lieu out
 	      $q = 0; // chi muc cua mang
@@ -171,7 +187,7 @@ function att_view($id,$thang){
 	      }
 	      $f = 0;// khoi tao chi muc mang
 	      for ($i=21;$i<=$rows;$i++) // hien thi du lieu
-		   {
+		{
 		      if ($i <= $days_in_last_month)
 			{
 			    if ($curr_month == 1){
@@ -227,12 +243,12 @@ function att_view($id,$thang){
 	       $status_holiday = $row_holiday->sh;
 	       $note = $row_holiday->note;
                $att_mark = $row_overtime->att_mark; // att mark mac dinh duoc lay tu bang overtime
-               $ot_w = $row_overtime->wot;
-               $st_w = $row_overtime->wst;
-               $ot_h = $row_overtime->hot;
-               $st_h = $row_overtime->hst;
-               $ot_oh = $row_overtime->pot;
-               $st_oh = $row_overtime->pst;
+               //$ot_w = $row_overtime->wot;
+               //$st_w = $row_overtime->wst;
+               //$ot_h = $row_overtime->hot;
+               //$st_h = $row_overtime->hst;
+               //$ot_oh = $row_overtime->pot;
+              // $st_oh = $row_overtime->pst;
                $detail = $row_overtime->detailwork;
 	       $nghiphep_nuangay = $row_leaves->a_p;
 	       $reason = $row_leaves->reason;
@@ -407,28 +423,28 @@ function att_view($id,$thang){
 		     }
 		   }
 		      echo "<tr>";
-		      echo "<td style='width: 70px;'>".date("j/n/Y",strtotime($date))."</td>";
-		      echo "<td style='width: 70px'>".$wday."</td>";
-		      echo "<td>".$att_mark."</td>";
-		      echo "<td>".$ot_w."</td>";
+		      echo "<td style='width:50px;'>".date("j/n",strtotime($date))."</td>";
+		      echo "<td style='width:50px;'>".$wday."</td>";
+		      echo "<td style='width:50px;'>".$att_mark."</td>";
+		      echo "<td style='width:20px;'>".$ot_w."</td>";
 		      $total_w_ot = $ot_w + $total_w_ot;
-		      echo "<td>".$st_w."</td>";
+		      echo "<td style='width:20px;'>".$st_w."</td>";
 		      $total_w_st = $st_w + $total_w_st;
-		      echo "<td>".$ot_h."</td>";
+		      echo "<td style='width:20px;'>".$ot_h."</td>";
 		      $total_h_ot = $ot_h + $total_h_ot;
-		      echo "<td>".$st_h."</td>";
+		      echo "<td style='width:20px;'>".$st_h."</td>";
 		      $total_h_st = $st_h + $total_h_st;
-		      echo "<td>".$ot_oh."</td>";
+		      echo "<td style='width:20px;'>".$ot_oh."</td>";
 		      $total_sh_ot = $ot_oh + $total_sh_ot;
-		      echo "<td>".$st_oh."</td>";
+		      echo "<td style='width:20px;'>".$st_oh."</td>";
 		      $total_sh_st = $st_oh + $total_sh_st;
-		      echo "<td style='width:180px'>".$detail."</td>";
-		      echo "<td>".$mang_in[$f]."</td>";
-		      echo "<td>".$mang_out[$f]."</td>";
+		      echo "<td style='width:140px;font-size:11px;'>".$detail."</td>";
+		      echo "<td style='width:60px;'>".$mang_in[$f]."</td>";
+		      echo "<td style='width:60px;'>".$mang_out[$f]."</td>";
 		      echo "</tr>";
 		     $f=$f+1;
 		}//het vong lap tao report
-		      echo "<tr>";
+		/*      echo "<tr>";
 		      echo "<td colspan = '3'>Total(hrs)</td>";
 		      echo "<td>".$total_w_ot."</td>";
 		      echo "<td>".$total_w_st."</td>";
@@ -437,16 +453,17 @@ function att_view($id,$thang){
 		      echo "<td>".$total_sh_ot."</td>";
 		      echo "<td>".$total_sh_st."</td>";
 		      echo "<td colspan = '3'>&nbsp</td>";
-		      echo "</tr>";
+		      echo "</tr>";*/
 	      echo "</table></br>";
+	      /*
 		  echo "<table width='50%' border=0 id='tb1'>";
 			echo "<tr>";
-			echo "<td><strong>Late-In Times this period</strong></td>";
-			echo "<td>".$count_lately."</td>";
+			echo "<td><strong>Late-In and early out times this period</strong></td>";
+			echo "<td>".($count_lately + $count_early)."</td>";
 			echo "</tr>";
 			echo "<tr>";
-			echo "<td><strong>Early-out Times this period</strong></td>";
-			echo "<td>".$count_early."</td>";
+			echo "<td><strong>Forgot in-out times this period</strong></td>";
+			echo "<td>".$count_x."</td>";
 			 echo "</tr>";
 		  echo "</table></br>";
 		  		echo "<table width='50%' border=0 id='tb1'>";
@@ -480,9 +497,16 @@ function att_view($id,$thang){
 					echo "<td>".$total_working_day."</td>";
 					echo "</tr>";
 				echo "</table></br>";
+			*/
 }
 /*Ham hien thi thoi gian cham cong tham khao*/
 function att_view_main($id){
+	    // check authen if it is already logined
+    session_start();
+	$username = $_SESSION['id'];
+	if($username == 0){
+			header("location:index.php");
+		}
 			include("config.php");
 			$username = $id;
 			echo "<table width='100%' border=0 id='tb1'>";
