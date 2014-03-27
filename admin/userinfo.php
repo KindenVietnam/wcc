@@ -54,7 +54,7 @@ if ($op == "op_id"){
 $sql_tim = "select staff_id,name,startdate from staff where staff_id='$tim'";
 }
 else{
-		$sql_tim = "select staff_id,name,startdate from staff where name ilike '%$tim%'";
+		$sql_tim = "select staff_id,name,startdate from staff where name ilike '%$tim%' ORDER BY staff_id ASC";
 	}
 echo '<h3>Staff Information</h3>';
                 echo '<table width="100%" border = "0">';
