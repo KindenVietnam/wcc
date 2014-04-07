@@ -17,7 +17,7 @@
 		// Include the main TCPDF library (search for installation path).
 		require_once('tcpdf.php');
 		// create new PDF document
-		//$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 		// set default header data
 		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 005', PDF_HEADER_STRING);
@@ -179,7 +179,6 @@
 
 		// Status of working
 		$sql_bang_tong_cham_cong = "select * from bang_tong_cham_cong where staff_id = '$manhanvien' and date_part('year',date) = '$nam_hien_tai' and date_part('month',date) = '$month'";
-
 		$result_bang_tong_cham_cong = pg_query($connection, $sql_bang_tong_cham_cong);
 		$rows_bang_tong_cham_cong = pg_fetch_array($result_bang_tong_cham_cong);
 		$pdf->SetFont('times', 'B', 8);
@@ -189,7 +188,6 @@
 		$pdf->MultiCell(10, 0, 'Days'.$txt, 1, 'L', 0, 1, '85', '194', true);
 		$pdf->MultiCell(60, 0, 'O: Attendance'.$txt, 1, 'L', 0, 1, '25', '198', true);
 		$pdf->MultiCell(10, 0, $rows_bang_tong_cham_cong['t_att'], 1, 'C', 0, 1, '85', '198', true);
-
 		$pdf->MultiCell(60, 0, 'X: Absent'.$txt, 1, 'L', 0, 1, '25', '202', true);
 		$pdf->MultiCell(10, 0, $rows_bang_tong_cham_cong['t_absent'], 1, 'C', 0, 1, '85', '202', true);
 		$pdf->MultiCell(60, 0, 'L: Leaves '.$txt, 1, 'L', 0, 1, '25', '206', true);
@@ -215,13 +213,10 @@
 		$pdf->MultiCell(40, 0, 'Approved by:'.$txt, 0, 'L', 0, 1, '105', '226', true);
 		$pdf->MultiCell(40, 0, 'Project Manager:'.$txt, 0, 'L', 0, 1, '110', '238', true);
 		$pdf->MultiCell(40, 0, 'ADM. General Manager'.$txt, 0, 'C', 0, 1, '130', '238', true);
-
 		// paint Header
-
 		$sql_ten_nhan_vien = "select * from staff where staff_id = '$manhanvien'";
 		$result_ten_nhanvien = pg_query($connection,$sql_ten_nhan_vien);
 		$rows_ten_nhan_vien  = pg_fetch_array($result_ten_nhanvien);
-
 		$pdf->SetFont('times', 'B', 14);
 		$pdf->MultiCell(60, 0, 'Attendance Record'.$txt, 0, 'L', 0, 1, '15', '6', true);
 		$pdf->MultiCell(40, 0,  $ngay_thang, 0, 'L', 0, 1, '105', '6', true);
@@ -233,10 +228,9 @@
 		$pdf->MultiCell(60, 0, 'System Management Section'.$txt, 0, 'L', 0, 1, '75', '12', true);
 		$pdf->MultiCell(80, 0, $rows_ten_nhan_vien['name'], 0, 'L', 0, 1, '75', '17', true);
 		$pdf->MultiCell(80, 0, "Applicant's Signature".$txt, 0, 'L', 0, 1, '130', '17', true);
-
 		$pdf->Ln(4);
-
 		$pdf->lastPage();
-		$pdf->Output('att_pdf/manhanvien.pdf','F');
+		ob_clean();
+		$pdf->Output('att_pdf/manhanvien.pdf','I');
 
 ?>
