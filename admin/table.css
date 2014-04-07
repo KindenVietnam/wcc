@@ -23,7 +23,8 @@ a {text-decoration: none}
 #mtb {
 	font: 15px/30px Verdana, Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
-        border-width: 1px solid #000000;
+    border-width: 1px solid #000000;
+	width: 100%;
 	}
 
 #mtb tr {   
