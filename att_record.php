@@ -231,25 +231,25 @@ function att_view($id,$thang){
 	       $sql_holiday = "select * from public_holiday where holiday = '$c_date'";
 	       $sql_overtime = "select * from overtime where staff_id = '$id' and workday = '$c_date'";
 	       $sql_leaves = "select count(fromdate) as leaves,a_p,reason from leaves where staff_id = '$id' and fromdate <= '$c_date' and '$c_date' <= todate group by fromdate,a_p,reason";
-               $wday = date("D",strtotime($date));
+           $wday = date("D",strtotime($date));
 	       $result_holiday = pg_query($connection,$sql_holiday);
-               $result1 = pg_query($connection, $sql1);
-               $result_overtime = pg_query($connection, $sql_overtime);
-               $row_overtime = pg_fetch_object($result_overtime);
+           $result1 = pg_query($connection, $sql1);
+           $result_overtime = pg_query($connection, $sql_overtime);
+           $row_overtime = pg_fetch_object($result_overtime);
 	       $result_leaves = pg_query($connection, $sql_leaves);
 	       $row_leaves = pg_fetch_object($result_leaves);
 	       $row_holiday = pg_fetch_object($result_holiday);
-               $row1 = pg_fetch_object($result1);
+           $row1 = pg_fetch_object($result1);
 	       $status_holiday = $row_holiday->sh;
 	       $note = $row_holiday->note;
-               $att_mark = $row_overtime->att_mark; // att mark mac dinh duoc lay tu bang overtime
+           $att_mark = $row_overtime->att_mark; // att mark mac dinh duoc lay tu bang overtime
                //$ot_w = $row_overtime->wot;
                //$st_w = $row_overtime->wst;
                //$ot_h = $row_overtime->hot;
                //$st_h = $row_overtime->hst;
                //$ot_oh = $row_overtime->pot;
               // $st_oh = $row_overtime->pst;
-               $detail = $row_overtime->detailwork;
+           $detail = $row_overtime->detailwork;
 	       $nghiphep_nuangay = $row_leaves->a_p;
 	       $reason = $row_leaves->reason;
 	       $ketqua_nghiphep = $row_leaves->leaves;
@@ -337,11 +337,11 @@ function att_view($id,$thang){
 			elseif(strcmp(trim($wday),'Sat') == 0){
 			    $sat = $sat + 1;
 			    if(count_sat($month) == 4){// trong khoang thoi gian cham cong co 4 thu 7
-				if($sat > 2){
-				    $att_mark = 'AH';
-				}
-				else{
-				    	    if((strlen($mang_in[$f]) == 0 )&&(strlen($mang_out[$f])== 0)){
+				    if($sat > 2){
+				       $att_mark = 'AH';
+				      }
+				    else{
+						if((strlen($mang_in[$f]) == 0 )&&(strlen($mang_out[$f])== 0)){
 						$att_mark = 'X';
 						$count_x = $count_x +1;
 					    }
@@ -363,7 +363,7 @@ function att_view($id,$thang){
 						$att_mark = 'O';
 						$count_o = $count_o + 1;
 					    }
-				}
+					}
 			    }
 			    else{//trong khoang thoi gian cham cong co 5 thu 7
 				if($sat > 3){
