@@ -83,7 +83,7 @@ ATTENDANCE RECORD MANAGEMENT
 								 include('search_att.php');
 							}
 							elseif($QS == 4){
-								 include('overtime.php');
+								 include('overtime_for_group.php');
 							}
 							elseif($QS == 41){
 								 include('overtime_for_one.php');
