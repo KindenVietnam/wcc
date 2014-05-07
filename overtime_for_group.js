@@ -295,6 +295,3 @@ function overtime_to_db(staffid,workday,weekday,att_mark,wot,wst,hot,hst,pot,pst
      //code
      //alert(staffid + workday + weekday + att_mark + wot + wst + hot + hst + pot + pst + detailwork);
 }
-function xinchao() {
-      alert("xin chao");
-}
