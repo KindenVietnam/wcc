@@ -36,7 +36,7 @@ $holiday_status = $row_holiday['ngayle'];// lay ngay nghi le trong co so du lieu
 <input type = 'hidden' name='ngayle' value='<?php echo $holiday_status; ?>'>
 <input type = 'hidden' name='thang' value='<?php echo $month; ?>'>
 <input type = 'hidden' name='status_update' value='<?php echo $status_update_detele; ?>'>
-<table width='100%' border=0 id='mtb'>
+<table border=0 id='mtb'>
 <tr>
 <td colspan='2' rowspan=3>Date</td>
 <td colspan='1' rowspan=3 style='width:70px;'>Attendance Mark</td>
@@ -75,17 +75,24 @@ $holiday_status = $row_holiday['ngayle'];// lay ngay nghi le trong co so du lieu
 </tr>
 </table>
 <p>
+    <label>Enter leave : </label>
 <label>
 <a href = "leaves.php?linkback=1&id=<?php echo $staffid; ?>&name=<?php echo $name; ?>&ngay=<?php echo $ngay;?>&month=<?php echo $month?>">
 Leaves</a>
 </label>
+<p></br>
+    <label>Business Trip : </label>
 <label>
 <input type="radio" name="radio" id="radio3" value="b" onclick = "congtac()"/>
 Bussiness
-</label>&nbsp&nbsp&nbsp&nbsp
+</label>&nbsp&nbsp&nbsp&nbsp<p></br>
+    <label>Over time AH : </label>
 <label>
-<input type="checkbox" id="check_ah" />AH
+<input type="checkbox" id="check_ah" />AH (choose this option if this Saturday is AH)
 </label>
+<p>
+</br>
+<label>Calculate over time : </label>
 <label>
 <input type="radio" name="radio" id="radio4" value="o" onclick = "overtime(2)"/>
 Over Time In
@@ -98,21 +105,31 @@ Over Time Out
 <input type="radio" name="radio" id="radio4" value="o" onclick = "overtime(3)"/>
 Over Time In and Out
 </label>
-&nbsp&nbsp&nbsp&nbsp
+&nbsp&nbsp&nbsp&nbsp<p></br>
+    <label> Assign Flag : </label>
 <input type="radio" name="radio" id="radio5" value="fi" />
 <label>
-Forgot In
+Forgot In(assign forgot check in)
 </label>
 <input type="radio" name="radio" id="radio5" value="fo" />
 <label>
-        Forgot Out
+Forgot Out(assign forgot check out)
 </label>
 </p>
-<p>
-<label>Reason
+<p></br>
+    <label> Input in-Out : </label>
+<input type="radio" name="radio" id="radio5" value="fi" />
+<label>
+Other In(input check in)
+</label>
+<input type="radio" name="radio" id="radio5" value="fo" />
+<label>
+Other Out(input check out)
+</label>
+<!--<label>Reason
 <textarea name="reason" id="textarea" cols="45" rows="5"></textarea>
 </label>
-</p>
+</p>-->
 <p>
 <input type="submit" name="save" id="button" value="Save" />
 </p>
