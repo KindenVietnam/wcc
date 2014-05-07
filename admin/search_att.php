@@ -14,6 +14,9 @@ $result_get_name = pg_query($connection,$sql_get_name);
 $row_name = pg_fetch_array($result_get_name);
 $name = $row_name['name'];
 $month = $_GET['month'];
+if($_GET['back']==1){
+	include('form_view_att_for_cal_overtime.php');
+}
 if(isset($_POST['view_att'])){
        if($_POST['currentmonth'] == 'curr_month'){
        $staffid = $_POST['staffid'];
