@@ -8,7 +8,7 @@ $thang = $_GET['thang'];
 if($del == 1){
     $sql_delete_overtime = "delete from overtime where staff_id = '$staffid' and workday = '$workday'";
     pg_query($connection, $sql_delete_overtime);
-    header("location:search_att.php?id=$staffid&name=$name&month=$thang");
+    header("location:search_att.php?id=$staffid&name=$name&month=$thang&back=1");
 }
 if(isset($_POST['save'])){
     $option = $_POST['radio'];
@@ -34,7 +34,7 @@ if(isset($_POST['save'])){
         set att_mark = '$att_mark', wot = '$ot_w', wst = '$st_w', hot = '$ot_h', hst = '$st_h', pot = '$ot_oh', pst = '$st_oh',detailwork = '$detail'
         where staff_id = '$staff_code' and workday = '$ngay'";
         pg_query($connection, $sql_update_overtime);
-        header("location:search_att.php?id=$staff_code&name=$name&month=$month");
+        header("location:search_att.php?id=$staff_code&name=$name&month=$month&back=1");
     }
     if($option == 'o'){
         // over time
@@ -49,7 +49,7 @@ if(isset($_POST['save'])){
             print '<script type="text/javascript">';
             print 'alert("Successfull ! ")';
             print '</script>';
-            header("location:search_att.php?id=$staff_code&name=$name&month=$month");
+            header("location:search_att.php?id=$staff_code&name=$name&month=$month&back=1");
         }
 
     }
@@ -60,7 +60,7 @@ if(isset($_POST['save'])){
         $sql_insert_inout = "insert into inout(staff_id,machine_no,checktime) values('$staff_code','1','$timein'),('$staff_code','1','$timeout')";
         pg_query($connection, $sql_insert_inout);
         pg_query($connection, $sql_insert_detail);
-        header("location:search_att.php?id=$staff_code&name=$name&month=$month");
+        header("location:search_att.php?id=$staff_code&name=$name&month=$month&back=1");
     }
     if($option == 'fi'){// forgot in
         $timein = $ngay." ".$in_time;
@@ -68,7 +68,7 @@ if(isset($_POST['save'])){
         $sql_insert_detail = "insert into overtime(staff_id,workday,detailwork) values('$staff_code','$ngay','$reason')";
         pg_query($connection, $sql_insert_inout);
         pg_query($connection, $sql_insert_detail);
-        header("location:search_att.php?id=$staff_code&name=$name&month=$month");
+        header("location:search_att.php?id=$staff_code&name=$name&month=$month&back=1");
     }
     if($option == 'fo'){ // forgot out
         $timeout = $ngay." ".$out_time;
@@ -76,7 +76,7 @@ if(isset($_POST['save'])){
         $sql_insert_detail = "insert into overtime(staff_id,workday,detailwork) values('$staff_code','$ngay','$reason')";
         pg_query($connection, $sql_insert_inout);
         pg_query($connection, $sql_insert_detail);
-        header("location:search_att.php?id=$staff_code&name=$name&month=$month");
+        header("location:search_att.php?id=$staff_code&name=$name&month=$month&back=1");
     }
 }
 ?>
