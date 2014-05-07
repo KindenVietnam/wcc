@@ -8,15 +8,15 @@
 <title>Over Time for group</title>
 </head>
 <body>
-						<?php
-							session_start();
-							$manhanvien = $_SESSION['id'];
-							if($manhanvien == 0){
-								header("location:index.php");
-							}
-							include('config.php');
-							$date = $_POST['date'];
-						?>
+    <?php
+            session_start();
+            $manhanvien = $_SESSION['id'];
+            if($manhanvien == 0){
+                    header("location:index.php");
+            }
+            include('config.php');
+            $date = $_POST['date'];
+    ?>
 <h3>Over Time For Group</h3>
 <form id="form1" name="form_overtime" method="post" action="welcome.php?4">
   <label>Location
@@ -24,7 +24,7 @@
     <?php
             $sql_load_location = "select * from machine where status <> '0'";
             $result_load_location = pg_query($connection, $sql_load_location);
-            echo "<option>All Staff</option>";
+            //echo "<option>All Staff</option>";
             while($row_load_location = pg_fetch_array($result_load_location))
 				{
 					echo "<option>".$row_load_location['name']."</option>";
@@ -51,16 +51,16 @@
     </tr>
   <?php
     $machine_name = $_POST['select_location'];
-	if(strcmp($machine_name,"All Staff")==0){
-		$sql_load_staff = "select staff_id as staffid,name as staff_name from staff where staff_id >= '1000' and staff_id <= '1999'order by staffid";
-	}
-    else{
+	//if(strcmp($machine_name,"All Staff")==0){
+	//	$sql_load_staff = "select staff_id as staffid,name as staff_name from staff where staff_id >= '1000' and staff_id <= '1999'order by staffid";
+	//}
+   // else{
     $sql_load_staff = "select staff.staff_id as staffid, staff.name as staff_name
                         from inout,staff,machine
                         where inout.staff_id = staff.staff_id and inout.machine_no = machine.machine_no and machine.name = '$machine_name' and date(inout.checktime) = '$date'
                         group by staffid,staff_name
                         order by staffid asc";
-	}
+	//}
 	
     $result_load_staff = pg_query($connection,$sql_load_staff);
     $id = 0;
@@ -73,7 +73,7 @@
         echo '<td>'.$row_load_staff['staffid'].'</td>';
         echo '<td>'.$row_load_staff['staff_name'].'</td>';
         //echo '<td><input type="hidden" name="date" value="'.$date.'"></td>';
-        echo '<td><label><input type="checkbox" name="checklist[]" value="'.$row_load_staff['staffid'].'" />Over time</label></td>';
+        echo '<td><label><input type="checkbox" name="checklist[]" value="'.$row_load_staff['staffid'].'" id="check_box_id"/>Over time</label></td>';
         echo '</tr>';
 		}
 		echo "<tr>";
