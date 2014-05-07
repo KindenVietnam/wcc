@@ -6,7 +6,7 @@ function checkAll(formname, status_checkbox)
  //vong lap duyet cac the co kieu la input
   for (var i=0; i<checkboxes.length; i++)  {
     // neu input type = checkbox thi moi hanh dong check hoac uncheck
-    if (checkboxes[i].type == 'checkbox')   {
+    if (checkboxes[i].id == 'check_box_id')   {
       checkboxes[i].checked = status_checkbox; // true = check ... false = uncheck
     }
   }
