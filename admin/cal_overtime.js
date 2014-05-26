@@ -74,9 +74,12 @@ var phut_in = 0;
                else if ((time_in <= 30)&&(time_in > 15 )) {
                     phut_in = 0.5;
                     }
-               else {
-                    phut_in = 0.75;
-			   }
+               else if ((time_in < 15)) {
+		    phut_in = 0.75;
+		     }
+	       else  {
+			phut_in = 0;
+		     } 
                
 	}
 	return phut_in;
