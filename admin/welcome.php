@@ -35,7 +35,7 @@ ATTENDANCE RECORD MANAGEMENT
 <li><a href="#">Overtime</a>
 	<ul>
 	<li><a href="welcome.php?41">Overtime for one</a></li>
-	<li><a href="welcome.php?4">OverTime For Group</a></li>
+	<li><a href="welcome.php?4">OverTime For All</a></li>
 	</ul>
 </li>
 <li><a href="#">In-Out</a>
