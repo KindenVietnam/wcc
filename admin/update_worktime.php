@@ -2,33 +2,33 @@
 <script src="cal_overtime.js" language="javascript"></script> 
 <b>Update Working Time</b></br></br>
 <?php
-include_once('config.php');
-include('ot.php');
-$staffid = $_GET['id'];
-$name = $_GET['name'];
-$ngay = $_GET['day'];
-$intime = $_GET['in'];
-$outtime = $_GET['out'];
-$month = $_GET['month'];
-$sql_holiday = "select count(holiday) as ngayle from public_holiday where holiday = '$ngay'";
-$sql_overtime = "select * from overtime where staff_id = '$staffid' and workday = '$ngay'";
-$sql_status = "select count(staff_id) as status from overtime where staff_id = '$staffid' and workday = '$ngay'";
-$result_overtime = pg_query($connection, $sql_overtime);
-$ketqua_holiday = pg_query($connection, $sql_holiday);
-$ketqua_status = pg_query($connection, $sql_status);
-$row_holiday = pg_fetch_array($ketqua_holiday);
-$row_overtime = pg_fetch_array($result_overtime);
-$row_status = pg_fetch_array($ketqua_status);
-$holiday_status = $row_holiday['ngayle'];// lay ngay nghi le trong co so du lieu
-  $att_mark = $row_overtime['att_mark'];
-  $wot = $row_overtime['wot'];
-  $wst = $row_overtime['wst'];
-  $hot = $row_overtime['hot'];
-  $hst = $row_overtime['hst'];
-  $pot = $row_overtime['pot'];
-  $pst = $row_overtime['pst'];
-  $detailwork = $row_overtime['detailwork'];
-  $status_update_detele = $row_status['status'];
+    include_once('config.php');
+    include('ot.php');
+    $staffid = $_GET['id'];
+    $name = $_GET['name'];
+    $ngay = $_GET['day'];
+    $intime = $_GET['in'];
+    $outtime = $_GET['out'];
+    $month = $_GET['month'];
+    $sql_holiday = "select count(holiday) as ngayle from public_holiday where holiday = '$ngay'";
+    $sql_overtime = "select * from overtime where staff_id = '$staffid' and workday = '$ngay'";
+    $sql_status = "select count(staff_id) as status from overtime where staff_id = '$staffid' and workday = '$ngay'";
+    $result_overtime = pg_query($connection, $sql_overtime);
+    $ketqua_holiday = pg_query($connection, $sql_holiday);
+    $ketqua_status = pg_query($connection, $sql_status);
+    $row_holiday = pg_fetch_array($ketqua_holiday);
+    $row_overtime = pg_fetch_array($result_overtime);
+    $row_status = pg_fetch_array($ketqua_status);
+      $holiday_status = $row_holiday['ngayle'];// lay ngay nghi le trong co so du lieu
+      $att_mark = $row_overtime['att_mark'];
+      $wot = $row_overtime['wot'];
+      $wst = $row_overtime['wst'];
+      $hot = $row_overtime['hot'];
+      $hst = $row_overtime['hst'];
+      $pot = $row_overtime['pot'];
+      $pst = $row_overtime['pst'];
+      $detailwork = $row_overtime['detailwork'];
+      $status_update_detele = $row_status['status'];
 ?>
 <form id="form1" name="update_worktime" method="post" action="update_overtime_leaves_inout.php">
 <label>Staff ID : </label><input type='text' name='staffid' value='<?php echo $staffid; ?>' readonly = '1'></br>
@@ -75,24 +75,19 @@ $holiday_status = $row_holiday['ngayle'];// lay ngay nghi le trong co so du lieu
 </tr>
 </table>
 <p>
-    <label>Enter leave : </label>
 <label>
 <a href = "leaves.php?linkback=1&id=<?php echo $staffid; ?>&name=<?php echo $name; ?>&ngay=<?php echo $ngay;?>&month=<?php echo $month?>">
 Leaves</a>
 </label>
-<p></br>
-    <label>Business Trip : </label>
+<p>
 <label>
 <input type="radio" name="radio" id="radio3" value="b" onclick = "congtac()"/>
 Bussiness
-</label>&nbsp&nbsp&nbsp&nbsp<p></br>
-    <label>Over time AH : </label>
+</label>&nbsp&nbsp&nbsp&nbsp<p>
 <label>
 <input type="checkbox" id="check_ah" />AH (choose this option if this Saturday is AH)
 </label>
 <p>
-</br>
-<label>Calculate over time : </label>
 <label>
 <input type="radio" name="radio" id="radio4" value="o" onclick = "overtime(2)"/>
 Over Time In
@@ -105,8 +100,7 @@ Over Time Out
 <input type="radio" name="radio" id="radio4" value="o" onclick = "overtime(3)"/>
 Over Time In and Out
 </label>
-&nbsp&nbsp&nbsp&nbsp<p></br>
-    <label> Assign Flag : </label>
+</br>
 <input type="radio" name="radio" id="radio5" value="fi" />
 <label>
 Forgot In(assign forgot check in)
@@ -116,8 +110,6 @@ Forgot In(assign forgot check in)
 Forgot Out(assign forgot check out)
 </label>
 </p>
-<p></br>
-    <label> Input in-Out : </label>
 <input type="radio" name="radio" id="radio5" value="fi" />
 <label>
 Other In(input check in)
@@ -126,13 +118,8 @@ Other In(input check in)
 <label>
 Other Out(input check out)
 </label>
-<!--<label>Reason
-<textarea name="reason" id="textarea" cols="45" rows="5"></textarea>
-</label>
-</p>-->
-<p>
+</br>
 <input type="submit" name="save" id="button" value="Save" />
-</p>
 </form>
 <?php
      if($status_update_detele > 0){
