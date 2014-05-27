@@ -1,4 +1,4 @@
-﻿<link rel="stylesheet" type="text/css" href="table.css"/>
+<link rel="stylesheet" type="text/css" href="table.css"/>
 <link href="calendar.css" rel="stylesheet" type="text/css">
 <script src="calendar.js" language="javascript"></script>
 <script src="checkall_js.js" language="javascript"></script>
@@ -17,21 +17,21 @@
             include('config.php');
             $date = $_POST['date'];
     ?>
-<h3>Over Time For Group</h3>
+<h3>Over Time For All Staffs</h3>
 <form id="form1" name="form_overtime" method="post" action="welcome.php?4">
-  <label>Location
+  <!--<label>Location
   <select name="select_location">
     <?php
-            $sql_load_location = "select * from machine where status <> '0'";
-            $result_load_location = pg_query($connection, $sql_load_location);
+           // $sql_load_location = "select * from machine where status <> '0'";
+            //$result_load_location = pg_query($connection, $sql_load_location);
             //echo "<option>All Staff</option>";
-            while($row_load_location = pg_fetch_array($result_load_location))
-				{
-					echo "<option>".$row_load_location['name']."</option>";
-				}
+          //  while($row_load_location = pg_fetch_array($result_load_location))
+	//			{
+	//				echo "<option>".$row_load_location['name']."</option>";
+	//			}
     ?>
   </select>
-  </label>
+  </label>-->
   <label>Date
   <input type="text" name="date" onFocus="JavaScript:showCalendarControl(this);" value="<?php echo $date; ?>"/>
   </label>
@@ -40,8 +40,8 @@
   <p><input type="checkbox" name="status_ah" value="1">AH</p>
   <table width="100%" border="0" id = "tb1">
     <tr>
-      <!--<td><b>Number</b></td>-->
-      <td><b>Location</b></td>
+      <!--<td><b>Number</b></td>
+      <td><b>Location</b></td>-->
       <td><b>Staff ID</b></td>
       <td><b>Name</b></td>
       <!--<td><b>Date</b></td>-->
@@ -50,34 +50,30 @@
       </td>
     </tr>
   <?php
-    $machine_name = $_POST['select_location'];
+   // $machine_name = $_POST['select_location'];
 	//if(strcmp($machine_name,"All Staff")==0){
 	//	$sql_load_staff = "select staff_id as staffid,name as staff_name from staff where staff_id >= '1000' and staff_id <= '1999'order by staffid";
 	//}
    // else{
-    $sql_load_staff = "select staff.staff_id as staffid, staff.name as staff_name
-                        from inout,staff,machine
-                        where inout.staff_id = staff.staff_id and inout.machine_no = machine.machine_no and machine.name = '$machine_name' and date(inout.checktime) = '$date'
-                        group by staffid,staff_name
-                        order by staffid asc";
+    $sql_load_staff = "select * from staff order by staff_id asc";
 	//}
 	
     $result_load_staff = pg_query($connection,$sql_load_staff);
     $id = 0;
     while($row_load_staff = pg_fetch_array($result_load_staff))
 		{
-        $id=$id+1;
-        echo '<tr>';
-        //echo '<td>'.$id.'</td>';
-        echo '<td>'.$machine_name.'</td>';
-        echo '<td>'.$row_load_staff['staffid'].'</td>';
-        echo '<td>'.$row_load_staff['staff_name'].'</td>';
-        //echo '<td><input type="hidden" name="date" value="'.$date.'"></td>';
-        echo '<td><label><input type="checkbox" name="checklist[]" value="'.$row_load_staff['staffid'].'" id="check_box_id"/>Over time</label></td>';
-        echo '</tr>';
+                    $id=$id+1;
+                    echo '<tr>';
+                    //echo '<td>'.$id.'</td>';
+                    //echo '<td>'.$machine_name.'</td>';
+                    echo '<td>'.$row_load_staff['staff_id'].'</td>';
+                    echo '<td>'.$row_load_staff['name'].'</td>';
+                    //echo '<td><input type="hidden" name="date" value="'.$date.'"></td>';
+                    echo '<td><label><input type="checkbox" name="checklist[]" value="'.$row_load_staff['staffid'].'" id="check_box_id"/>Over time</label></td>';
+                    echo '</tr>';
 		}
 		echo "<tr>";
-		echo "<td colspan='3'>Total staffs</td>";
+		echo "<td colspan='2'>Total staffs</td>";
 		echo "<td>".$id."</td>";
 		echo "</tr>";
   ?>
@@ -541,7 +537,7 @@ function overtime_output($ah_status,$status,$total_ot_ra,$total_st_ra,$total_ot_
                }
           $total_ot_oh = $oh+$total_ot;
           $total_st_oh = $total_st;
-          overtime_to_db($manv,$ngay,$weekday,'','','',$total_ot_oh,$total_st_oh,'','','',$timein,$timeout,$tennhanvien);
+          overtime_to_db($manv,$ngay,$weekday,'SH','','','','',$total_ot_oh,$total_st_oh,'',$timein,$timeout,$tennhanvien);
           
      }
      else{ // hien over time ngay thuong
@@ -622,20 +618,20 @@ function overtime_to_db($staffid,$work_day,$week_day,$attmark,$w_ot,$w_st,$h_ot,
     }
     else{
         echo "<tr>";
-		echo "<td style='width: 70px;'>".$staffid."</td>";
+        echo "<td style='width: 70px;'>".$staffid."</td>";
         echo "<td style='width: 170px;'>".$staffname."</td>";
-		echo "<td style='width: 70px'>".$work_day."</td>";
+	echo "<td style='width: 70px'>".$work_day."</td>";
         echo "<td style='width: 70px'>".$week_day."</td>";
-		//echo "<td>".$attmark."</td>";
-		echo "<td>".$w_ot."</td>";
-		echo "<td>".$w_st."</td>";
-		echo "<td>".$h_ot."</td>";
-		echo "<td>".$h_st."</td>";
-		echo "<td>".$p_ot."</td>";
-		echo "<td>".$p_st."</td>";
-		echo "<td>".$thoigianvao."</td>";
-		echo "<td>".$thoigianra."</td>";
-		echo "</tr>";
+	//echo "<td>".$attmark."</td>";
+	echo "<td>".$w_ot."</td>";
+	echo "<td>".$w_st."</td>";
+	echo "<td>".$h_ot."</td>";
+	echo "<td>".$h_st."</td>";
+	echo "<td>".$p_ot."</td>";
+	echo "<td>".$p_st."</td>";
+	echo "<td>".$thoigianvao."</td>";
+	echo "<td>".$thoigianra."</td>";
+	echo "</tr>";
     }
 }
 ?>
