@@ -539,9 +539,8 @@ function overtime_output($ah_status,$status,$total_ot_ra,$total_st_ra,$total_ot_
      }
      else{ // hien over time ngay thuong
                    overtime_to_db($manv,$ngay,$weekday,'O',$total_ot,$total_st,'','','','','',$timein,$timeout,$tennhanvien);
-          }
+         }
           
-     }
 }
 //ham tinh overtime tu form dang ki overtime theo vung(nhom)
 function overtime_phut_ra($time_out,$gio_out) { // function to compute over time in minutes for checking out
