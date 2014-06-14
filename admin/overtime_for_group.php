@@ -90,13 +90,10 @@
 <p>&nbsp;</p>
 <?php
 include_once('ot.php');
+$date = $_POST['date'];
+$ah_status = $_POST['status_ah'];
 if(isset($_POST['approved']))
-	{
-            $date = $_POST['date'];
-            $ah_status = $_POST['status_ah'];
-            if($ah_status != 1){
-                    $trangthai = 3;
-            }
+{
       echo "<table id = 'tb1' width = '100%'>";
       echo "<tr>";
       echo "<td colspan='1' rowspan=3>Staff ID</td>";
@@ -279,8 +276,8 @@ function tinh_inout($ah_status,$staff_id, $workday,$trangthai){
 			}
                         if(strtotime($workday) == strtotime($c_date)){
                             $ngaytrongtuan = date('D', strtotime($c_date));
-                            overtime_from_location($ah_status,$staff_id,$staff_name,$ngaytrongtuan,$c_date,$mang_in[$f],$mang_out[$f],$holiday_status,$trangthai);
-                        }  
+                             overtime_from_location($ah_status,$staff_id,$staff_name,$ngaytrongtuan,$c_date,$mang_in[$f],$mang_out[$f],$holiday_status,$trangthai);
+                        }
                         $f=$f+1;// tang so chi muc mang
 		}
 }
@@ -541,19 +538,7 @@ function overtime_output($ah_status,$status,$total_ot_ra,$total_st_ra,$total_ot_
           
      }
      else{ // hien over time ngay thuong
-          switch ($status) {
-               case 1:{
-                     overtime_to_db($manv,$ngay,$weekday,'O',$total_ot_ra,$total_st_ra,'','','','','',$timein.$timeout,$tennhanvien);
-                     break;
-               }
-               case 2:{
-                    overtime_to_db($manv,$ngay,$weekday,'O',$total_ot_vao,$total_st_vao,'','','','','',$timein,$timeout,$tennhanvien);
-                     break;
-               }
-               case 3:{
                    overtime_to_db($manv,$ngay,$weekday,'O',$total_ot,$total_st,'','','','','',$timein,$timeout,$tennhanvien);
-                    break;
-               }
           }
           
      }
