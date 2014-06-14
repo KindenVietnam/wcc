@@ -603,7 +603,7 @@ function overtime_phut_vao($time_in,$gio_in) { //function to compute over time i
 }
 
 function overtime_to_db($staffid,$work_day,$week_day,$attmark,$w_ot,$w_st,$h_ot,$h_st,$p_ot,$p_st,$detail_work,$thoigianvao,$thoigianra,$staffname){
-    include_once("config.php");
+    include("config.php");
      //code
      //echo $staffid . $work_day . $week_day . $attmark . $w_ot . $w_st . $h_ot . $h_st . $p_ot . $p_st . $detail_work . "</br>";
     $sql_insert_overtime = "INSERT INTO overtime(staff_id,workday,weekday,att_mark,wot,wst,hot,hst,pot,pst,detailwork) VALUES ('$staffid','$work_day','$week_day','$attmark','$w_ot','$w_st','$h_ot','$h_st','$p_ot','$p_st','$detail_work')";
