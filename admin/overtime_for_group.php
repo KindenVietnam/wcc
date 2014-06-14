@@ -90,13 +90,13 @@
 <p>&nbsp;</p>
 <?php
 include_once('ot.php');
-$date = $_POST['date'];
-$ah_status = $_POST['status_ah'];
-if($ah_status != 1){
-	$trangthai = 3;
-}
 if(isset($_POST['approved']))
 	{
+            $date = $_POST['date'];
+            $ah_status = $_POST['status_ah'];
+            if($ah_status != 1){
+                    $trangthai = 3;
+            }
       echo "<table id = 'tb1' width = '100%'>";
       echo "<tr>";
       echo "<td colspan='1' rowspan=3>Staff ID</td>";
@@ -603,7 +603,7 @@ function overtime_phut_vao($time_in,$gio_in) { //function to compute over time i
 }
 
 function overtime_to_db($staffid,$work_day,$week_day,$attmark,$w_ot,$w_st,$h_ot,$h_st,$p_ot,$p_st,$detail_work,$thoigianvao,$thoigianra,$staffname){
-    include("config.php");
+    include_once("config.php");
      //code
      //echo $staffid . $work_day . $week_day . $attmark . $w_ot . $w_st . $h_ot . $h_st . $p_ot . $p_st . $detail_work . "</br>";
     $sql_insert_overtime = "INSERT INTO overtime(staff_id,workday,weekday,att_mark,wot,wst,hot,hst,pot,pst,detailwork) VALUES ('$staffid','$work_day','$week_day','$attmark','$w_ot','$w_st','$h_ot','$h_st','$p_ot','$p_st','$detail_work')";
