@@ -258,7 +258,7 @@ function hienthi(status,total_ot_ra,total_st_ra,total_ot_vao,total_st_vao,total_
 		     if(total_ot_h <= 4){
 				document.update_worktime.att_mark.value = '1/2AH';
 			 }
-             else{
+                     else{
 			   document.update_worktime.att_mark.value = 'AH';
 			}
 		  }
