@@ -35,7 +35,6 @@
   <label>Date
   <input type="text" name="date" onFocus="JavaScript:showCalendarControl(this);" value="<?php echo $date; ?>"/>
   </label>
-  <input type="submit" name="Submit" value="Search" />
   <p> &nbsp </p>
   <p><input type="checkbox" name="status_ah" value="1">AH</p>
   <table width="100%" border="0" id = "tb1">
@@ -69,7 +68,7 @@
                     echo '<td>'.$row_load_staff['staff_id'].'</td>';
                     echo '<td>'.$row_load_staff['name'].'</td>';
                     //echo '<td><input type="hidden" name="date" value="'.$date.'"></td>';
-                    echo '<td><label><input type="checkbox" name="checklist[]" value="'.$row_load_staff['staffid'].'" id="check_box_id"/>Over time</label></td>';
+                    echo '<td><label><input type="checkbox" name="checklist[]" value="'.$row_load_staff['staff_id'].'" id="check_box_id"/>Over time</label></td>';
                     echo '</tr>';
 		}
 		echo "<tr>";
@@ -280,6 +279,50 @@ function tinh_inout($ah_status,$staff_id, $workday,$trangthai){
                         }
                         $f=$f+1;// tang so chi muc mang
 		}
+}
+
+//ham tinh overtime tu form dang ki overtime theo vung(nhom)
+function overtime_phut_ra($time_out,$gio_out) { // function to compute over time in minutes for checking out
+     if ($gio_out >= 17) {
+               if (($time_out >= 15)&&($time_out < 30)) {
+                    $phut_out = 0.25;
+                    return $phut_out;
+               }
+               else if (($time_out >=30)&&($time_out < 45 )) {
+                     $phut_out = 0.5;
+                    return $phut_out;
+               }
+               else if (($time_out >= 45 )&&($time_out < 60 )) {
+                    $phut_out = 0.75;
+                    return $phut_out;
+               }
+               else{
+                    $phut_out = 0;
+                    return $phut_out;
+               }
+     }
+     else{
+          return 0;
+     }
+}
+function overtime_phut_vao($time_in,$gio_in) { //function to compute over time in minutes for checking in
+   //  if (gio_in < 8) {
+               if (($time_in <= 45)&&($time_in > 30)) {
+                    $phut_in = 0.25;
+                    return $phut_in;
+               }
+               else if (($time_in <= 30)&&($time_in > 15 )) {
+                    $phut_in = 0.5;
+                    return $phut_in;
+               }
+               else if (($time_in <= 15 )&&($time_in > 0 )) {
+                    $phut_in = 0.75;
+                    return $phut_in;
+               }
+               else{
+                    $phut_in = 0;
+                    return $phut_in;
+               }
 }
 
 // ham xuat du lieu overtime
@@ -538,53 +581,12 @@ function overtime_output($ah_status,$status,$total_ot_ra,$total_st_ra,$total_ot_
           
      }
      else{ // hien over time ngay thuong
-                   overtime_to_db($manv,$ngay,$weekday,'O',$total_ot,$total_st,'','','','','',$timein,$timeout,$tennhanvien);
+
+            overtime_to_db($manv,$ngay,$weekday,'O',$total_ot,$total_st,'','','','','',$timein,$timeout,$tennhanvien);
          }
           
 }
-//ham tinh overtime tu form dang ki overtime theo vung(nhom)
-function overtime_phut_ra($time_out,$gio_out) { // function to compute over time in minutes for checking out
-     if ($gio_out >= 17) {
-               if (($time_out >= 15)&&($time_out < 30)) {
-                    $phut_out = 0.25;
-                    return $phut_out;
-               }
-               else if (($time_out >=30)&&($time_out < 45 )) {
-                     $phut_out = 0.5;
-                    return $phut_out;
-               }
-               else if (($time_out >= 45 )&&($time_out < 60 )) {
-                    $phut_out = 0.75;
-                    return $phut_out;
-               }
-               else{
-                    $phut_out = 0;
-                    return $phut_out;
-               }
-     }
-     else{
-          return 0;
-     }
-}
-function overtime_phut_vao($time_in,$gio_in) { //function to compute over time in minutes for checking in
-   //  if (gio_in < 8) {
-               if (($time_in <= 45)&&($time_in > 30)) {
-                    $phut_in = 0.25;
-                    return $phut_in;
-               }
-               else if (($time_in <= 30)&&($time_in > 15 )) {
-                    $phut_in = 0.5;
-                    return $phut_in;
-               }
-               else if (($time_in <= 15 )&&($time_in > 0 )) {
-                    $phut_in = 0.75;
-                    return $phut_in;
-               }
-               else{
-                    $phut_in = 0;
-                    return $phut_in;
-               }
-}
+
 
 function overtime_to_db($staffid,$work_day,$week_day,$attmark,$w_ot,$w_st,$h_ot,$h_st,$p_ot,$p_st,$detail_work,$thoigianvao,$thoigianra,$staffname){
     include("config.php");
