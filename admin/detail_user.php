@@ -8,7 +8,14 @@ if(isset($_POST['save'])){
 	$staffname = $_POST['staffname'];
 	$email = $_POST['email'];
 	$startday = $_POST['startday'];
-	$sql_update = "update staff set staff_id = '$staffid',name='$staffname',startdate = '$startday',email='$email' where staff_id = '$staffid'";
+        $check_status = $_POST['status'];
+        if($check_status == 'checked'){
+            $status = 1;
+        }
+        else{
+            $status = 0;
+        }
+	$sql_update = "update staff set staff_id = '$staffid',name='$staffname',startdate = '$startday',email='$email',status='$status' where staff_id = '$staffid'";
 	$s = pg_query($connection, $sql_update);
 	header("Location:detail_user.php?id1=$staffid");
 }
@@ -20,6 +27,13 @@ while($hang = pg_fetch_array($result)){
 	$email = $hang['email'];
 	$startdate = $hang['startdate'];
 	$lastleaves_year = $hang['lastyear_leaves'];
+        $status = $hang['status'];
+        if($status == 1 ){
+            $value_check = 'checked';
+        }
+        else{
+            $value_check = '';
+        }
 	$year = date("Y") - date("Y", strtotime($startdate));
 					if ($year <= 5){
 							if($year ==0){
@@ -70,17 +84,20 @@ echo '<td>Total Leaves Day in  ' . date("Y").'  :  </td>';
 echo '<td><input type="text" name="totalleavesday" value="'.$totalleaves.'"></td>';
 echo '</tr>';
 echo '<tr>';
+echo '<td><input type="checkbox" name="status" '.$value_check.'></td><td></td>';
+echo '</tr>';
+echo '<tr>';
 echo '<td><input type="submit" name="save" value="Save"></td><td></td>';
 echo '</tr>';
 echo '</table>';
 echo '<h3>List of Leaves days in '.date("Y").'</h3>';
 echo '<table name="list_leaves" border="0">';
-				echo "<tr bgcolor='#C7E2E2'>";
+		echo "<tr bgcolor='#C7E2E2'>";
                 echo "<td>From </td>";
                 echo "<td>To </td>";
-				echo "<td>Time</td>";
-				echo "<td>Number of leaves day</td>";
-				echo "<td>Reason </td>";
+		echo "<td>Time</td>";
+		echo "<td>Number of leaves day</td>";
+		echo "<td>Reason </td>";
                 echo "<td>Control </td>";
                 echo "</tr>";
                 $sql_str = "SELECT * FROM leaves WHERE staff_id='$staffid' AND date_part('year', fromdate) = date_part('year', current_date)";
