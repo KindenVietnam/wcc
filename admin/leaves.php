@@ -115,7 +115,7 @@ echo '<td>To : </td>';
 echo '<td><input type="text" name="todate" onfocus="JavaScript:showCalendarControl(this);"><input type="radio" name="ap" value="1">PM</td>';
 echo '</tr>';
 echo '<tr>';
-echo '<td>Due To</td>';
+echo '<td>Reason</td>';
 echo '<td>';
 echo '<select name="due_to">';
 echo '<option>Private matter</option>';
