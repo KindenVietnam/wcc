@@ -86,7 +86,7 @@ if(isset($_POST['save'])){
 
 }
 echo '<form name="form1" method="post" action="welcome.php?3">';
-echo "<h3>Search Staff's Leaves Day Information</h3>";
+echo "<h3>Leaves Information</h3>";
 echo '<table>';
 echo '<input type="radio" name="type" value="op_id">Staff ID<br>';
 echo "<input type='radio' name='type' value='op_name'>Staff's Name<br>";
