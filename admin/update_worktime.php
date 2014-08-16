@@ -82,7 +82,7 @@ Leaves</a>
 <p>
 <label>
 <input type="radio" name="radio" id="radio3" value="b" onclick = "congtac()"/>
-Bussiness
+Business
 </label>&nbsp&nbsp&nbsp&nbsp<p>
 <label>
 <input type="checkbox" id="check_ah" />AH (choose this option if this Saturday is AH)
