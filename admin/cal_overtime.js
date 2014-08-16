@@ -32,7 +32,7 @@ function congtac() {
       clear();
       document.update_worktime.intime.value = '8:00';
       document.update_worktime.outtime.value = '17:00';
-      document.update_worktime.detail.value = 'Bussiness working';
+      document.update_worktime.detail.value = 'Business working';
 }
 function overtime_phut_ra(time_out,gio_out) { // function to compute over time in minutes for checking out
      if (gio_out >= 17) {
