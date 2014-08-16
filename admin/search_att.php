@@ -18,7 +18,7 @@ if($_GET['back']==1){
 	include('form_view_att_for_cal_overtime.php');
 }
 if(isset($_POST['view_att'])){
-       if($_POST['currentmonth'] == 'curr_month'){
+       if (($_POST['currentmonth'] == 'curr_month') OR ($_POST['optionmonth'] == "-")) {
        $staffid = $_POST['staffid'];
        $name = $_POST['staffname'];
        $month = date('n');
@@ -47,6 +47,7 @@ echo '<br>';
 echo '<label>Staff Name: </lable><input type="text" name="staffname" value = "'.$name.'" readonly = 1><br></br>';
 echo '<label>Choose a month : </label>';
 echo '<select name ="optionmonth">';
+echo '<option selected value = "-">-</option>';
 echo '<option value = "1">1</option>';
 echo '<option value = "2">2</option>';
 echo '<option value = "3">3</option>';
