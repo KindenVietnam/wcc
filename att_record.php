@@ -425,7 +425,7 @@ function att_view($id,$thang){
 		      echo "<tr>";
 		      echo "<td style='width:50px;'>".date("j/n",strtotime($date))."</td>";
 		      echo "<td style='width:50px;'>".$wday."</td>";
-		      echo "<td style='width:50px;'>".$att_mark."</td>";
+		      echo "<td style='width:50px;'>".''."</td>";
 		      echo "<td style='width:20px;'>".$ot_w."</td>";
 		      $total_w_ot = $ot_w + $total_w_ot;
 		      echo "<td style='width:20px;'>".$st_w."</td>";
