@@ -1,4 +1,5 @@
 config.php
+conn_sync.py
 /admin/att_pdf/*.pdf
 /admin/att_pdf/att.pdf
 website-chamcong.komodoproject
