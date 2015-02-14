@@ -113,14 +113,14 @@ ATTENDANCE RECORD ONLINE
 			echo "<td>START WORKING DAY : &nbsp&nbsp</td>";
 			echo "<td>&nbsp&nbsp</td>";
 			echo "</tr>";
-			echo "<tr>";
-			 echo "<td>LEAVES OF ".(date("Y")-1)."&nbsp : &nbsp</td>";
-			 echo "<td>&nbsp</td>";//$totalleaves is in here
-			 echo "</tr>";
-			 echo "<tr>";
-			 echo "<td>LEAVES OF ".date("Y")."&nbsp : &nbsp</td>";
-			 echo "<td>&nbsp</td>";//$totalleaves is in here
-			 echo "</tr>";
+		#	echo "<tr>";
+		#	 echo "<td>LEAVES OF ".(date("Y")-1)."&nbsp : &nbsp</td>";
+		#	 echo "<td>&nbsp</td>";//$totalleaves is in here
+		#	 echo "</tr>";
+		#	 echo "<tr>";
+		#	 echo "<td>LEAVES OF ".date("Y")."&nbsp : &nbsp</td>";
+		#	 echo "<td>&nbsp</td>";//$totalleaves is in here
+		#	 echo "</tr>";
 		}
 	//while($row2 = pg_fetch_object($result2))
 	//	{
