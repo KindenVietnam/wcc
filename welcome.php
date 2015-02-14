@@ -154,11 +154,9 @@ ATTENDANCE RECORD ONLINE
            &nbsp&nbsp&nbsp&nbsp&nbsp&nbspNGHIEM-BA-HIEU@KINDEN.COM.VN</br>
            &nbsp&nbsp&nbsp&nbsp&nbsp&nbspTRUONG-QUANG-THANH@KINDEN.COM.VN</br>
 	</font>
-	<b>FUTURE FUNCTIONS</b></br>
-           &nbsp&nbsp&nbsp&nbsp&nbsp&nbspASSIGN/REGISTER LEAVE</br>
-           &nbsp&nbsp&nbsp&nbsp&nbsp&nbspASSIGN/REGISTER OVERTIME</br>
-      
-	<b>KINDEN VIETNAM IT TEAM</b>";
+	<p>
+	<font color='green'>
+	<b>KINDEN VIETNAM IT SYSTEM</b></font>";
 	echo "</p></td>";
 	echo "</tr>";
 	echo "</table>";
