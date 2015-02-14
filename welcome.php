@@ -24,7 +24,7 @@
 <td>
 <font color = "green">
 <h2>
-ATTENDANCE RECORD ONLINE (CTRL + F5 TO REFRESH)
+ATTENDANCE RECORD ONLINE
 </h2>
 </font>
 	<!--<em><p>Vì lý do kĩ thuật nên dữ liệu chấm công từ chiều 2/4/2013 đến sáng 3/4/2013 không có.</p>
