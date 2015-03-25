@@ -233,13 +233,13 @@ function att_view($id,$thang){
 	       $sql_leaves = "select count(fromdate) as leaves,a_p,reason from leaves where staff_id = '$id' and fromdate <= '$c_date' and '$c_date' <= todate group by fromdate,a_p,reason";
            $wday = date("D",strtotime($date));
 	       $result_holiday = pg_query($connection,$sql_holiday);
-           $result1 = pg_query($connection, $sql1);
+          // $result1 = pg_query($connection, $sql1);
            $result_overtime = pg_query($connection, $sql_overtime);
            $row_overtime = pg_fetch_object($result_overtime);
 	       $result_leaves = pg_query($connection, $sql_leaves);
 	       $row_leaves = pg_fetch_object($result_leaves);
 	       $row_holiday = pg_fetch_object($result_holiday);
-           $row1 = pg_fetch_object($result1);
+           //$row1 = pg_fetch_object($result1);
 	       $status_holiday = $row_holiday->sh;
 	       $note = $row_holiday->note;
            $att_mark = $row_overtime->att_mark; // att mark mac dinh duoc lay tu bang overtime
