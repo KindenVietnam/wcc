@@ -1,3 +1,7 @@
+May 04, 2015
++ Page welcome.php loads slowly
++ Database query related to Inout table takes a lot of time
+
 July 31, 2014
 o Change user credential in sql connection
 
