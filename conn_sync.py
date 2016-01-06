@@ -14,8 +14,8 @@ ivs_database = 'BZ_Kinden'
 
 # psql server connection information
 pg_host = 'localhost'
-pg_user = 'postgres'
-pg_password = 'danghungit'
+pg_user = 'att_pg'
+pg_password = 'hung!hpc'
 pg_database = 'ivs'
 
 # set up connection string
