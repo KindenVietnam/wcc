@@ -37,7 +37,7 @@ ATTENDANCE RECORD ONLINE
 <td width = "20%" valign ="top">
 <ul id="css_vertical_menu">
 <li><a href="welcome.php">Home Page</a></li>
-<li><a href="welcome.php?4">Leaves Information</a></li>
+<li><a href="">Leaves Information</a></li>
 <li><a href="welcome.php?3">Attendance Record</a></li>
 <li><a href="welcome.php?1">Change Password</a></li>
 <li><a href="index.php">LOGOUT</a></li>
