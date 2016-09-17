@@ -150,9 +150,8 @@ ATTENDANCE RECORD ONLINE
 	echo "<b>THIS WEBSITE IS IN BETA STAGE</b></br>
 	<font size='1.5'>ALL COMMENTS ARE HIGHLY WELCOME</br>
 	PLEASE SEND BY EMAIL EITHER TO:</br>
-           &nbsp&nbsp&nbsp&nbsp&nbsp&nbspDANG-DUC-HUNG@KINDEN.COM.VN</br>
-           &nbsp&nbsp&nbsp&nbsp&nbsp&nbspNGHIEM-BA-HIEU@KINDEN.COM.VN</br>
-           &nbsp&nbsp&nbsp&nbsp&nbsp&nbspTRUONG-QUANG-THANH@KINDEN.COM.VN</br>
+           &nbsp&nbsp&nbsp&nbspNGHIEM-BA-HIEU@KINDEN.COM.VN</br>
+           &nbsp&nbsp&nbsp&nbspTRUONG-QUANG-THANH@KINDEN.COM.VN</br>
 	</font>
 	<p>
 	<font color='green'>
