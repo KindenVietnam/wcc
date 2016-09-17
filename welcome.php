@@ -38,7 +38,7 @@ ATTENDANCE RECORD ONLINE
 <ul id="css_vertical_menu">
 <li><a href="welcome.php">Home Page</a></li>
 <li><a href="">Leaves Information</a></li>
-<li><a href="welcome.php?3">Attendance Record</a></li>
+<li><a href="">Attendance Record</a></li>
 <li><a href="welcome.php?1">Change Password</a></li>
 <li><a href="index.php">LOGOUT</a></li>
 </ul>
